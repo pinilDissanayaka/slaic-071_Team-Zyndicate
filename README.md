@@ -2,7 +2,7 @@
 
 The Election Insight App is a real-time, AI-powered tool designed to help voters make informed decisions during elections by providing accurate and transparent insights. It utilizes the power of LangChain and Large Language Models (LLMs) to analyze candidate manifestos, verify campaign claims, and provide reliable election-related information.
 
-🚀 Features
+## 🚀 Features
 
 1. Manifesto Comparator
 - Side-by-Side Comparison: Easily compare candidate manifestos on key issues such as economy, healthcare, education, and environment.
@@ -31,7 +31,7 @@ The Election Insight App is a real-time, AI-powered tool designed to help voters
 - Real-Time Alerts: Stay updated with notifications about manifesto updates, claim verifications, and major campaign events.
 - Candidate Tracker: Follow key events, public appearances, and announcements for each candidate.
   
-🔧 Tech Stack
+## 🔧 Tech Stack
 
 - LangChain: Manages the logic and workflow for LLM-powered features like manifesto comparison, fact-checking, and the AI chatbot.
 - Large Language Model (LLM): The core AI model that provides natural language understanding and generation capabilities.
@@ -39,7 +39,7 @@ The Election Insight App is a real-time, AI-powered tool designed to help voters
 - Hugging Face Models : Leverage specific LLMs from Hugging Face for enhanced natural language processing and query handling.
   
 
-🛠️ Installation
+## 🛠️ Installation
 
 To get started with the Election Insight App, follow these steps:
 
@@ -71,14 +71,14 @@ python app.py
 
 Open your browser and navigate to http://localhost:8000 to start using the Election Insight App.
 
-🤖 Usage
+## 🤖 Usage
 
 1. Manifesto Comparison: Use the "Compare Manifestos" feature to see the promises of different candidates side by side.
 2. Fact-Checker: Enter claims or campaign statements to verify their truthfulness.
 3. Ask the Bot: Use the AI chatbot to ask questions related to the election, candidates, or manifestos.
 4. Trending Insights: Stay updated with real-time trends and sentiment analysis of election campaigns.
 
-🌟 Contribution
+## 🌟 Contribution
 
 We welcome contributions! If you would like to add new features or fix bugs, feel free to fork the repository and submit a pull request.
 
@@ -88,10 +88,10 @@ We welcome contributions! If you would like to add new features or fix bugs, fee
 4. Push to the branch: git push origin feature-branch.
 5. Submit a pull request.
 
-📄 License
+## 📄 License
 
 This project is licensed under the MIT License
 
-🙌 Acknowledgments
+## 🙌 Acknowledgments
 
 Special thanks to the developers of LangChain and LLMs for providing the core technologies behind this project!
