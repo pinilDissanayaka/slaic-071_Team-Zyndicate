@@ -32,6 +32,7 @@ The Election Insight App is a real-time, AI-powered tool designed to help voters
 - Candidate Tracker: Follow key events, public appearances, and announcements for each candidate.
   
 🔧 Tech Stack
+
 - LangChain: Manages the logic and workflow for LLM-powered features like manifesto comparison, fact-checking, and the AI chatbot.
 - Large Language Model (LLM): The core AI model that provides natural language understanding and generation capabilities.
 - Pinecone : For efficient vector search and retrieval of campaign data and manifestos.
@@ -43,34 +44,42 @@ The Election Insight App is a real-time, AI-powered tool designed to help voters
 To get started with the Election Insight App, follow these steps:
 
 1. Clone the Repository:
+   
 ```
 git clone https://github.com/yourusername/election-insight-app.git
 cd election-insight-app
 ```
 
 2. Install Dependencies: Install the necessary Python libraries by running:
+   
 ```
 pip install -r requirements.txt
 ```
 
 3. Configure API Keys:
+   
 Set up your API keys for LLM services.
 If using Pinecone for vector storage, add your API key in the config.py file.
 
 4. Run the Application:
+   
 ```
 python app.py
 ```
 
-Access the App: Open your browser and navigate to http://localhost:8000 to start using the Election Insight App.
+5. Access the App:
+
+Open your browser and navigate to http://localhost:8000 to start using the Election Insight App.
 
 🤖 Usage
+
 1. Manifesto Comparison: Use the "Compare Manifestos" feature to see the promises of different candidates side by side.
 2. Fact-Checker: Enter claims or campaign statements to verify their truthfulness.
 3. Ask the Bot: Use the AI chatbot to ask questions related to the election, candidates, or manifestos.
 4. Trending Insights: Stay updated with real-time trends and sentiment analysis of election campaigns.
 
 🌟 Contribution
+
 We welcome contributions! If you would like to add new features or fix bugs, feel free to fork the repository and submit a pull request.
 
 1. Fork the repository.
@@ -80,7 +89,9 @@ We welcome contributions! If you would like to add new features or fix bugs, fee
 5. Submit a pull request.
 
 📄 License
+
 This project is licensed under the MIT License
 
 🙌 Acknowledgments
+
 Special thanks to the developers of LangChain and LLMs for providing the core technologies behind this project!
