@@ -35,6 +35,7 @@ The Election Insight App is a real-time, AI-powered tool designed to help voters
 - Response & Interaction: AI chatbot interacts with users, answers questions, and provides instant election insights.
 - Verification Module: Cross-references campaign claims with public records and fact-checking databases.
 - UI/UX: Provides a user-friendly interface for comparison, fact-checking, and interaction with the AI chatbot.
+
 🛠️ Installation
 To get started with the Election Insight App, follow these steps:
 
