@@ -29,7 +29,7 @@ os.environ["GOOGLE_PROJECT_ID"]=os.getenv('GOOGLE_PROJECT_ID')
 
 embeddings=GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
 
-retriever=PineconeVectorStore(embedding=embeddings, index_name="manifesto").as_retriever(search_kwargs={"k": 6})
+retriever=PineconeVectorStore(embedding=embeddings, index_name="manifesto").as_retriever(search_kwargs={"k": 10})
 
 llm=ChatGroq(model="llama-3.1-70b-versatile",
             temperature=0.5,
