@@ -61,7 +61,7 @@ graph=work_flow.compile()
 def chat_with_manifesto(user_input):
     for event in graph.stream({"question": user_input}):
         pass
-            
+
     return response
 
 
