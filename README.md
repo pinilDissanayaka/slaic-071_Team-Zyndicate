@@ -1,5 +1,7 @@
 # Election-Insight-App
 
+![electionInsightApp](https://github.com/user-attachments/assets/2544b492-d0af-4b7f-91d7-8cb1445ca202)
+
 The Election Insight App is a real-time, AI-powered tool designed to help voters make informed decisions during elections by providing accurate and transparent insights. It utilizes the power of LangChain and Large Language Models (LLMs) to analyze candidate manifestos, verify campaign claims, and provide reliable election-related information.
 
 ## 🚀 Features
