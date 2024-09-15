@@ -1,18 +1,9 @@
-import os
-from typing import Annotated
-from dotenv import load_dotenv
-from langchain_groq.chat_models import ChatGroq
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langgraph.graph import END, StateGraph, START
-from langchain_pinecone import PineconeVectorStore
-from pydantic import BaseModel, Field
 from typing import List, TypedDict
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from langchain.prompts import ChatPromptTemplate
 from utils.utils import retriever, llm
-
-
 
 
 class State(TypedDict):
@@ -56,18 +47,18 @@ def generate_node(state:State):
     return {'generation' : response}
 
 
-work_flow=StateGraph(State)
 
+work_flow=StateGraph(State)
 work_flow.add_node("retrieve_node", retrieve_node)
 work_flow.add_node("generate_node", generate_node)
-
 work_flow.add_edge(START, "retrieve_node")
 work_flow.add_edge("retrieve_node", "generate_node")
 work_flow.add_edge("generate_node", END)
 
 graph=work_flow.compile()
 
-def get_response(user_input):
+
+def chat_with_manifesto(user_input):
     for event in graph.stream({"question": user_input}):
         pass
             

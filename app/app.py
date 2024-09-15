@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.chat.Graph import get_response
+from utils.chatbot import get_response
 
 
 # App title
