@@ -1,5 +1,5 @@
 import streamlit as st
-from utils.chat.Graph import generate_node
+from utils.chat.Graph import get_response
 
 
 # App title
@@ -20,8 +20,8 @@ for message in st.session_state.messages:
 
 # Function for generating LLM response
 def generate_response(prompt_input):
-    res=generate_node(question=prompt_input)
-    return res
+    return get_response(user_input=prompt_input)
+
 
 # User-provided prompt
 if prompt := st.chat_input():
