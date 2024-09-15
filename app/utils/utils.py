@@ -31,8 +31,8 @@ embeddings=GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
 
 retriever=PineconeVectorStore(embedding=embeddings, index_name="manifesto").as_retriever(search_kwargs={"k": 6})
 
-llm=ChatGroq(model="llama-3.1-8b-instant",
-            temperature=0,
+llm=ChatGroq(model="llama-3.1-70b-versatile",
+            temperature=0.5,
             max_tokens=None,
             timeout=None)
 

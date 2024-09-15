@@ -21,8 +21,11 @@ with st.sidebar:
         file_path=os.path.join(temp_file_path, uploaded_file.name)
         with open(file_path, 'wb') as file_to_write:
             file_to_write.write(uploaded_file.read())
-    
-    
+            
+
+st.title("🤖 AI Chatbot for Manifesto & Election Queries")
+st.write("-----------------------------------------------------------------------------------------------------------")
+     
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
     st.session_state.messages = [{"role": "assistant", "content": "How may I help you? 👋"}]

@@ -25,8 +25,8 @@ def retrieve_node(state:State):
 
 def generate_node(state:State):
     question_prompt_template=  """You are an assistant with access to the full manifestos of all candidates in the upcoming election.
-    Answer question question : {question}. Provide accurate, fact-based responses using the manifestos, and offer comparisons if asked.
-    using only given context : {context}
+    Answer question question : {QUESTION}. Provide accurate, fact-based responses using the manifestos, and offer comparisons if asked.
+    using only given context : {CONTEXT}
     Ensure that all answers are concise, neutral, and factually based on the information provided in the manifestos.
     If the answer is not found in the context, kindly state "I don't know." Don't try to make up an answer.
     """
@@ -34,7 +34,7 @@ def generate_node(state:State):
     question_prompt=ChatPromptTemplate.from_template(question_prompt_template)
 
     question_chain = (
-        {"question":RunnablePassthrough(), "context": RunnablePassthrough()}
+        {"QUESTION":RunnablePassthrough(), "CONTEXT": RunnablePassthrough()}
         | question_prompt
         | llm
         | StrOutputParser()
@@ -42,7 +42,7 @@ def generate_node(state:State):
     
     global response
 
-    response=question_chain.invoke({"question": state["question"], "context": state["documents"]})
+    response=question_chain.invoke({"QUESTION": state["question"], "CONTEXT": state["documents"]})
     
     return {'generation' : response}
 
