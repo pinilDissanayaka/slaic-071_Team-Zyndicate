@@ -11,9 +11,11 @@ st.set_page_config(page_title="🤗💬 Election-Insight-App ")
 #app side bar
 with st.sidebar:
     st.subheader("Upload the manifesto of the candidate.")
+    
     uploaded_files = st.file_uploader(
-    "Choose a PDF, TXT files", accept_multiple_files=True
-    )
+    "Choose a PDF, TXT files", accept_multiple_files=True)
+    
+    
     for uploaded_file in uploaded_files:
         st.write("filename:", uploaded_file.name)
         file_path=os.path.join(temp_file_path, uploaded_file.name)
