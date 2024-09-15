@@ -69,7 +69,7 @@ If using Pinecone for vector storage, add your API key in the config.py file.
 4. Run the Application:
    
 ```
-python app.py
+streamlit run app.py
 ```
 
 5. Access the App:
