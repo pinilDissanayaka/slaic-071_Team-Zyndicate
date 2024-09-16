@@ -23,7 +23,7 @@ llm_model="llama-3.1-70b-versatile"
 embedding_model="models/text-embedding-004"
 vector_store_index_name="manifesto"
 search_k=10
-temp_dir="/temp"
+temp_dir="temp"
 
 
 embeddings=GoogleGenerativeAIEmbeddings(model=embedding_model)
