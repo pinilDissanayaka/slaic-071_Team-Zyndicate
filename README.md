@@ -3,6 +3,7 @@
 ![election![Screenshot 2024-09-15 213902](https://github.com/user-attachments/assets/58daa655-4255-4703-8266-a8cbae10d0c9)
 ![Screenshot 2024-09-15 231026](https://github.com/user-attachments/assets/dca794e6-aeb2-4335-b72b-a852d0154d3c)
 ![Screenshot 2024-09-15 233006](https://github.com/user-attachments/assets/c97be96d-521d-41f9-b498-b1900aa53180)
+![Screenshot 2024-09-16 171718](https://github.com/user-attachments/assets/20c0f2b8-8291-4581-8d5f-4841416dd0c4)
 
 
 The Election Insight App is a real-time, AI-powered tool designed to help voters make informed decisions during elections by providing accurate and transparent insights. It utilizes the power of LangChain and Large Language Models (LLMs) to analyze candidate manifestos, verify campaign claims, and provide reliable election-related information.
@@ -74,7 +75,7 @@ streamlit run app.py
 
 5. Access the App:
 
-Open your browser and navigate to http://localhost:8000 to start using the Election Insight App.
+Open your browser and navigate to http://localhost:8501/ to start using the Election Insight App.
 
 ## 🤖 Usage
 
