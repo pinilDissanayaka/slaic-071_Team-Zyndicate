@@ -21,18 +21,18 @@ with st.sidebar:
         with open(file_path, 'wb') as file_to_write:
             file_to_write.write(uploaded_file.read())
 
-st.title("🔍 Fact Checker")
+st.title("⚖️ Fact Checker")
 st.write("-----------------------------------------------------------------------------------------------------------") 
 selected_party = st.selectbox(
-    "Select the party to fact check",
+    "Select the party to fact check :",
     ("NPP", "NDC", "CPP", "PPP", "GUM", "GFP", "GCPP", "APC", "PNC", "LPG", "NDP", "Independent")
 )
 
-claim = st.text_input("Enter the claim as text to fact check. ")
+claim = st.text_area("Enter the claim as text to fact check :")
 
 if claim and selected_party:
     if st.button("Fact Check"):
-        with st.spinner("Progress..."):
+        with st.spinner("Thinking..."):
             generated_response, evaluation_response=fact_checker(claim=claim, party=selected_party)
             
             st.write(generated_response)

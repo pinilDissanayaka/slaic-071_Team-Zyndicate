@@ -24,7 +24,7 @@ with st.sidebar:
             file_to_write.write(uploaded_file.read())
             
     if uploaded_files:
-        with st.spinner("Progress..."):
+        with st.spinner("Thinking..."):
             st.button("Upload to vector store.", on_click=load_into_vector_store)
 
 

@@ -31,15 +31,15 @@ st.title("🔍 Manifesto Comparator")
 st.write("-----------------------------------------------------------------------------------------------------------")
 
 selected_category = st.selectbox(
-    "Which category do you want to compare",
+    "Which category do you want to compare :",
     ("Economic Growth", "IMF Programme", "Taxation", "Governance", "Social Protection", "Supplementary", "Infrastructure", "Trade and Export", "Agriculture", "Education", "Law and Order", "Health", "Reconciliation", "Corruption", "Labour"),
 )
 
-candidates = st.text_input("Enter candidate names or party to compare.")
+candidates = st.text_input("Enter candidate names or party to compare :")
 
 if candidates and selected_category:
     if st.button("compare"):
-        with st.spinner("Progress..."):
+        with st.spinner("Thinking..."):
             generated_response, evaluation_response=manifesto_comparator(domain=selected_category, candidates=candidates)
             
             st.write(generated_response)
