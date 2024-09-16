@@ -1,20 +1,11 @@
 import os
-from typing import Annotated
+import logging
 from dotenv import load_dotenv
-from pinecone import Pinecone, ServerlessSpec
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_groq.chat_models import ChatGroq
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
-from langchain_experimental.text_splitter import SemanticChunker
-from langgraph.graph import END, StateGraph, START
 from langchain_pinecone import PineconeVectorStore
-from pydantic import BaseModel, Field
-from typing import List, TypedDict
-from langchain_core.output_parsers import StrOutputParser
-from langchain_core.runnables import RunnablePassthrough
-from langchain.prompts import ChatPromptTemplate
-from langgraph.graph.message import add_messages
 
 load_dotenv()
 
@@ -69,19 +60,26 @@ def store(doc_splits, index_name=vector_store_index_name):
 
 
 def load_into_vector_store(directory=temp_dir):
-    list_of_dirs=os.listdir(directory)
+    try:
+        list_of_dirs=os.listdir(directory)
     
-    for dir in list_of_dirs:
-        relative_path=os.path.join(directory, dir)
-        if os.path.splitext(dir)[1] == 'pdf':
-            store(split(load_pdf(relative_path)))
-        elif os.path.splitext(dir)[1] == 'txt':
-            store(split(load_txt(relative_path)))
+        for dir in list_of_dirs:
+            relative_path=os.path.join(directory, dir)
+            if os.path.splitext(dir)[1] == 'pdf':
+                store(split(load_pdf(relative_path)))
+            elif os.path.splitext(dir)[1] == 'txt':
+                store(split(load_txt(relative_path)))
+    except Exception as e:
+        logging.exception(e)
+            
             
             
 def save_pdf_txt_on_temp_dir(uploaded_file, temp_file_path=temp_dir):
-    file_path=os.path.join(temp_file_path, uploaded_file.name)
-    with open(file_path, 'wb') as file_to_write:
-        file_to_write.write(uploaded_file.read())
+    try:
+        file_path=os.path.join(temp_file_path, uploaded_file.name)
+        with open(file_path, 'wb') as file_to_write:
+            file_to_write.write(uploaded_file.read())
+    except Exception as e:
+        logging.exception(e)
             
 
