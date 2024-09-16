@@ -1,6 +1,9 @@
 # Election-Insight-App
 
-![electionInsightApp](https://github.com/user-attachments/assets/2544b492-d0af-4b7f-91d7-8cb1445ca202)
+![election![Screenshot 2024-09-15 213902](https://github.com/user-attachments/assets/58daa655-4255-4703-8266-a8cbae10d0c9)
+![Screenshot 2024-09-15 231026](https://github.com/user-attachments/assets/dca794e6-aeb2-4335-b72b-a852d0154d3c)
+![Screenshot 2024-09-15 233006](https://github.com/user-attachments/assets/c97be96d-521d-41f9-b498-b1900aa53180)
+
 
 The Election Insight App is a real-time, AI-powered tool designed to help voters make informed decisions during elections by providing accurate and transparent insights. It utilizes the power of LangChain and Large Language Models (LLMs) to analyze candidate manifestos, verify campaign claims, and provide reliable election-related information.
 
@@ -61,12 +64,12 @@ pip install -r requirements.txt
 3. Configure API Keys:
    
 Set up your API keys for LLM services.
-If using Pinecone for vector storage, add your API key in the config.py file.
+If using Pinecone for vector storage, add your API key in the .env file.
 
 4. Run the Application:
    
 ```
-python app.py
+streamlit run app.py
 ```
 
 5. Access the App:
