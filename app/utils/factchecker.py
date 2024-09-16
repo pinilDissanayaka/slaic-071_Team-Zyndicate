@@ -49,7 +49,7 @@ def fact_generate_node(fact:FactChecker):
 def fact_verdict_node(fact:FactChecker):
     verdict_prompt_template=  """You are a fact checker tasked with providing a final conclusion percentage: {SCORE} based on a specific party: {PARTY}.
     Provide a score out of 10 for each candidate or party based on the provided evidence.
-    Indicate as a percentage how much truth there is in the final conclusion.
+    Indicate as a percentage how much truth there is in the final conclusion.final conclution provide as english,sinhala and tamil languages.
 
     - If the score is less than 50%, output: "This party cheats or provides misleading information."
     - If the score is between 50% and 75%, output: "This party can contribute something positive to the country, but there are concerns."
@@ -58,6 +58,9 @@ def fact_verdict_node(fact:FactChecker):
     Score: {SCORE}
     Party: {PARTY}
     Final Conclusion:
+        1. English
+        2. Sinhala
+        3. Tamil
     """
 
     verdict_prompt=ChatPromptTemplate.from_template(verdict_prompt_template)
