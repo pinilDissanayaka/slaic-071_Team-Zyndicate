@@ -1,8 +1,10 @@
 import streamlit as st
-import os
 from utils.chatbot import chat_with_manifesto
 from utils.utils import load_into_vector_store, save_pdf_txt_on_temp_dir
 
+
+def clear_state():
+    st.session_state.clear()
 
 # App title
 st.set_page_config(page_title="🤗💬 Election-Insight-App ")
@@ -22,7 +24,8 @@ with st.sidebar:
     if uploaded_files:
         with st.spinner("Processing..."):
             st.button("Upload to vector store.", on_click=load_into_vector_store)
-
+            
+    st.button("Clear Chat History !", on_click=clear_state)
 
 
 st.title("🤖 AI Chatbot for Manifesto & Election Queries")
@@ -56,3 +59,4 @@ if st.session_state.messages[-1]["role"] != "assistant":
             st.write(response) 
     message = {"role": "assistant", "content": response}
     st.session_state.messages.append(message)
+
