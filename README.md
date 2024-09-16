@@ -75,7 +75,7 @@ streamlit run app.py
 
 5. Access the App:
 
-Open your browser and navigate to http://localhost:8000 to start using the Election Insight App.
+Open your browser and navigate to http://localhost:8501/ to start using the Election Insight App.
 
 ## 🤖 Usage
 
