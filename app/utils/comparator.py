@@ -101,7 +101,7 @@ graph=workflow.compile()
 
 def manifesto_comparator(domain:str, candidates:str):
     for event in graph.stream({"domain": domain, "candidates": candidates}):
-        pass
+      pass
     
     global evaluation_response
     global generated_response

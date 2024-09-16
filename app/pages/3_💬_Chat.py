@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 from utils.chatbot import chat_with_manifesto
+from utils.utils import load_into_vector_store
 
 temp_file_path="temp/"
 
@@ -22,10 +23,15 @@ with st.sidebar:
         with open(file_path, 'wb') as file_to_write:
             file_to_write.write(uploaded_file.read())
             
+    if uploaded_files:
+        with st.spinner("Progress..."):
+            st.button("Upload to vector store.", on_click=load_into_vector_store)
+
+
 
 st.title("🤖 AI Chatbot for Manifesto & Election Queries")
 st.write("-----------------------------------------------------------------------------------------------------------")
-     
+
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
     st.session_state.messages = [{"role": "assistant", "content": "How may I help you? 👋"}]

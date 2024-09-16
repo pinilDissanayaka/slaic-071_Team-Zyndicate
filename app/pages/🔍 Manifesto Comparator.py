@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 from utils.comparator import manifesto_comparator
+from utils.utils import load_into_vector_store
 
 temp_file_path="temp/"
 
@@ -18,8 +19,13 @@ with st.sidebar:
     for uploaded_file in uploaded_files:
         st.write("filename:", uploaded_file.name)
         file_path=os.path.join(temp_file_path, uploaded_file.name)
+        
         with open(file_path, 'wb') as file_to_write:
             file_to_write.write(uploaded_file.read())
+    
+    if uploaded_files:
+        with st.spinner("Progress..."):
+            st.button("Upload to vector store.", on_click=load_into_vector_store)
             
 st.title("🔍 Manifesto Comparator")
 st.write("-----------------------------------------------------------------------------------------------------------")
