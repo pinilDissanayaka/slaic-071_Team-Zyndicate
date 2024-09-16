@@ -25,7 +25,7 @@ st.title("⚖️ Fact Checker")
 st.write("-----------------------------------------------------------------------------------------------------------") 
 selected_party = st.selectbox(
     "Select the party to fact check :",
-    ("NPP", "NDC", "CPP", "PPP", "GUM", "GFP", "GCPP", "APC", "PNC", "LPG", "NDP", "Independent")
+    ("National People's Power | NPP", "Samagi Jana Balawegaya | SJB", "Sri Lanka Podujana Peramuna | SLPP", "NDC", "CPP", "PPP", "GUM", "GFP", "GCPP", "APC", "PNC", "LPG", "NDP", "Independent")
 )
 
 claim = st.text_area("Enter the claim as text to fact check :")
