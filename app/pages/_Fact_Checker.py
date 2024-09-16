@@ -21,7 +21,7 @@ with st.sidebar:
         with open(file_path, 'wb') as file_to_write:
             file_to_write.write(uploaded_file.read())
 
-st.title("🔍 Fact Checker")
+st.title("✅Fact Checker")
 st.write("-----------------------------------------------------------------------------------------------------------") 
 selected_party = st.selectbox(
     "Select the party to fact check",
