@@ -64,7 +64,7 @@ pip install -r requirements.txt
 3. Configure API Keys:
    
 Set up your API keys for LLM services.
-If using Pinecone for vector storage, add your API key in the config.py file.
+If using Pinecone for vector storage, add your API key in the .env file.
 
 4. Run the Application:
    
