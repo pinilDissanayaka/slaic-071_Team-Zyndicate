@@ -1,6 +1,0 @@
-langchain 
-langchain_pinecone 
-langchain_groq 
-langchain_google_genai
-langchain_experimental
-pypdf
