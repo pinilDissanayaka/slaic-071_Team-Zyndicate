@@ -3,7 +3,7 @@ from typing import List, TypedDict
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from langchain.prompts import ChatPromptTemplate
-from utils.utils import retriever, llm
+from utils import retriever, llm
 
 
 class State(TypedDict):
