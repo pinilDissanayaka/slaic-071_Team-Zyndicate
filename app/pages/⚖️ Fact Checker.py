@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 from utils.factchecker import fact_checker
+from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store
 
 temp_file_path="temp/"
 
@@ -17,9 +18,11 @@ with st.sidebar:
     
     for uploaded_file in uploaded_files:
         st.write("filename:", uploaded_file.name)
-        file_path=os.path.join(temp_file_path, uploaded_file.name)
-        with open(file_path, 'wb') as file_to_write:
-            file_to_write.write(uploaded_file.read())
+        save_pdf_txt_on_temp_dir(uploaded_file=uploaded_file)
+        
+    if uploaded_files:
+        with st.spinner("Processing..."):
+            st.button("Upload to vector store.", on_click=load_into_vector_store)
 
 st.title("⚖️ Fact Checker")
 st.write("-----------------------------------------------------------------------------------------------------------") 

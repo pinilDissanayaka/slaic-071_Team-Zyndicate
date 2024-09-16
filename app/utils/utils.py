@@ -28,11 +28,18 @@ os.environ["GOOGLE_API_KEY"]=os.getenv('GOOGLE_API_KEY')
 os.environ["GOOGLE_PROJECT_ID"]=os.getenv('GOOGLE_PROJECT_ID')
 
 
-embeddings=GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
+llm_model="llama-3.1-70b-versatile"
+embedding_model="models/text-embedding-004"
+vector_store_index_name="manifesto"
+search_k=10
+temp_dir="/temp"
 
-retriever=PineconeVectorStore(embedding=embeddings, index_name="manifesto").as_retriever(search_kwargs={"k": 10})
 
-llm=ChatGroq(model="llama-3.1-70b-versatile",
+embeddings=GoogleGenerativeAIEmbeddings(model=embedding_model)
+
+retriever=PineconeVectorStore(embedding=embeddings, index_name=vector_store_index_name).as_retriever(search_kwargs={"k": search_k})
+
+llm=ChatGroq(model=llm_model,
             temperature=0.5,
             max_tokens=None,
             timeout=None)
@@ -56,12 +63,12 @@ def split(docs):
 
     return doc_splits
 
-def store(doc_splits, index_name='manifesto'):
-    pinecone_vectore_store=PineconeVectorStore.from_documents(documents=doc_splits, embedding=embeddings, index_name="manifesto")
+def store(doc_splits, index_name=vector_store_index_name):
+    pinecone_vectore_store=PineconeVectorStore.from_documents(documents=doc_splits, embedding=embeddings, index_name=index_name)
     return pinecone_vectore_store
 
 
-def load_into_vector_store(directory="/temp"):
+def load_into_vector_store(directory=temp_dir):
     list_of_dirs=os.listdir(directory)
     
     for dir in list_of_dirs:
@@ -70,5 +77,11 @@ def load_into_vector_store(directory="/temp"):
             store(split(load_pdf(relative_path)))
         elif os.path.splitext(dir)[1] == 'txt':
             store(split(load_txt(relative_path)))
+            
+            
+def save_pdf_txt_on_temp_dir(uploaded_file, temp_file_path=temp_dir):
+    file_path=os.path.join(temp_file_path, uploaded_file.name)
+    with open(file_path, 'wb') as file_to_write:
+        file_to_write.write(uploaded_file.read())
             
 
