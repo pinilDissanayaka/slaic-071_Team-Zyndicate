@@ -33,7 +33,8 @@ def generate_node(state:Graph_State):
   Your job is to present a clear, fact-based comparison of how each given candidate or party addresses the selected category. 
   Be objective and highlight the key points from each manifesto or policy statement. 
   Ensure the comparison is concise and provides meaningful insights for the user to evaluate.
-  Summarize the main goals and policies for each candidate and offer an analysis of how these align with their past statements or voting records,
+  Summarize the main goals and policies for each candidate and offer an analysis of how these align with their past statements or voting records.
+  final conclusion provide as english,sinhala and tamil languages.
   If the answer is not found in the context, kindly state "I don't know." Don't try to make up an answer.
   """
 
