@@ -40,16 +40,18 @@ uploaded_image_file = st.file_uploader("Choose a PDF, TXT, JPEG or PNG files", a
 if uploaded_image_file:
     with st.spinner("Extracting..."):
         image_claim=convert_img_to_text(uploaded_image_file=uploaded_image_file)
-        st.write("Text extracted from uploaded file.")
-        st.write(image_claim)
+    st.write("Text extracted from uploaded file.")
+    st.write(image_claim)
+    
 
+if image_claim or text_claim:
+    claim=image_claim+" "+text_claim
 
-if text_claim or image_claim and selected_party:
-    claim=text_claim + image_claim
+if claim or image_claim and selected_party:
     if st.button("Fact Check"):
         with st.spinner("Thinking..."):
             generated_response, evaluation_response=fact_checker(claim=claim, party=selected_party)
-            
+            st.write("---------------------------------------------------------------------------------------------------------------")
             st.write(generated_response)
             st.write("---------------------------------------------------------------------------------------------------------------")
             st.write(evaluation_response)
