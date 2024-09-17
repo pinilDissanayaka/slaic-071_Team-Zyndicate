@@ -5,6 +5,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from typing import TypedDict, List
 
+
 class FactChecker(TypedDict):
     claim: str
     party: str
@@ -14,7 +15,7 @@ class FactChecker(TypedDict):
 
 response:str
 
-def fact_retrive_node(fact:FactChecker):
+def fact_retrieve_node(fact:FactChecker):
     question=f'''Retrieve relevant documents from the vector database based on the following inputs: {fact['claim']} and a 
     selected party {fact['party']}. Ensure the documents focus on the selected party, providing insights 
     into the policies or statements made by the specified candidates or parties'''
@@ -49,7 +50,7 @@ def fact_generate_node(fact:FactChecker):
 def fact_verdict_node(fact:FactChecker):
     verdict_prompt_template=  """You are a fact checker tasked with providing a final conclusion percentage: {SCORE} based on a specific party: {PARTY}.
     Provide a score out of 10 for each candidate or party based on the provided evidence.
-    Indicate as a percentage how much truth there is in the final conclusion.final conclution provide as english,sinhala and tamil languages.
+    Indicate as a percentage how much truth there is in the final conclusion.final conclusion provide as english,sinhala and tamil languages.
 
     - If the score is less than 50%, output: "This party cheats or provides misleading information."
     - If the score is between 50% and 75%, output: "This party can contribute something positive to the country, but there are concerns."
@@ -80,7 +81,7 @@ def fact_verdict_node(fact:FactChecker):
 
 
 factFlow=StateGraph(FactChecker)
-factFlow.add_node("fact_retrieve_node", fact_retrive_node)
+factFlow.add_node("fact_retrieve_node", fact_retrieve_node)
 factFlow.add_node("fact_generate_node", fact_generate_node)
 factFlow.add_node("fact_verdict_node", fact_verdict_node)
 
@@ -99,4 +100,6 @@ def fact_checker(party:str, claim:str):
    global percentage_response
 
    return verdict_response, percentage_response   
+
+
 

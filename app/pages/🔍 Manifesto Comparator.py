@@ -1,6 +1,7 @@
 import os
 import streamlit as st
 from utils.comparator import manifesto_comparator
+from utils.utils import load_into_vector_store, save_pdf_txt_on_temp_dir
 
 temp_file_path="temp/"
 
@@ -17,23 +18,26 @@ with st.sidebar:
     
     for uploaded_file in uploaded_files:
         st.write("filename:", uploaded_file.name)
-        file_path=os.path.join(temp_file_path, uploaded_file.name)
-        with open(file_path, 'wb') as file_to_write:
-            file_to_write.write(uploaded_file.read())
+        save_pdf_txt_on_temp_dir(uploaded_file=uploaded_file)
+
+    
+    if uploaded_files:
+        with st.spinner("Processing..."):
+            st.button("Upload to vector store.", on_click=load_into_vector_store)
             
 st.title("🔍 Manifesto Comparator")
 st.write("-----------------------------------------------------------------------------------------------------------")
 
 selected_category = st.selectbox(
-    "Which category do you want to compare",
+    "Which category do you want to compare :",
     ("Economic Growth", "IMF Programme", "Taxation", "Governance", "Social Protection", "Supplementary", "Infrastructure", "Trade and Export", "Agriculture", "Education", "Law and Order", "Health", "Reconciliation", "Corruption", "Labour"),
 )
 
-candidates = st.text_input("Enter candidate names or party to compare.")
+candidates = st.text_input("Enter candidate names or party to compare :")
 
 if candidates and selected_category:
     if st.button("compare"):
-        with st.spinner("Progress..."):
+        with st.spinner("Thinking..."):
             generated_response, evaluation_response=manifesto_comparator(domain=selected_category, candidates=candidates)
             
             st.write(generated_response)

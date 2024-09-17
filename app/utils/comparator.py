@@ -24,16 +24,17 @@ def retrieve_node(state:Graph_State):
 
   retrieved_documents=retriever.invoke(question)
 
-  return {"documents": retrieved_documents}
+  return {"documents": retrieved_documents, "candidates":state['candidates']}
 
 
 def generate_node(state:Graph_State):
-  summary_prompt_template="""You are an assistant tasked with comparing election candidates or political parties based on specific categories. 
+  summary_prompt_template="""You are an assistant tasked with comparing only given election candidates {CANDIDATES} or political parties based on specific categories. 
   The user will provide the category {DOMAIN} and the context want to compare. {CONTEXT}
-  Your job is to present a clear, fact-based comparison of how each candidate or party addresses the selected category. 
+  Your job is to present a clear, fact-based comparison of how each given candidate or party addresses the selected category. 
   Be objective and highlight the key points from each manifesto or policy statement. 
   Ensure the comparison is concise and provides meaningful insights for the user to evaluate.
-  Summarize the main goals and policies for each candidate and offer an analysis of how these align with their past statements or voting records,
+  Summarize the main goals and policies for each candidate and offer an analysis of how these align with their past statements or voting records.
+  final conclusion provide as english,sinhala and tamil languages.
   If the answer is not found in the context, kindly state "I don't know." Don't try to make up an answer.
   """
 
@@ -41,13 +42,13 @@ def generate_node(state:Graph_State):
 
 
   summary_chain = (
-    {"DOMAIN":RunnablePassthrough(), "CONTEXT": retriever}
+    {"CANDIDATES":RunnablePassthrough() , "DOMAIN":RunnablePassthrough(), "CONTEXT": RunnablePassthrough()}
     | summary_prompt
     | llm
     | StrOutputParser()
     )
 
-  generation=summary_chain.invoke(state['domain'])
+  generation=summary_chain.invoke({"CANDIDATES": state["candidates"], "DOMAIN": state["domain"], "CONTEXT": state["documents"]})
   global generated_response
   generated_response=generation
 
@@ -101,7 +102,7 @@ graph=workflow.compile()
 
 def manifesto_comparator(domain:str, candidates:str):
     for event in graph.stream({"domain": domain, "candidates": candidates}):
-        pass
+      pass
     
     global evaluation_response
     global generated_response
