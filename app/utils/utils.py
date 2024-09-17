@@ -6,9 +6,6 @@ from langchain_groq.chat_models import ChatGroq
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
-from langchain_google_vertexai import ChatVertexAI
-from langchain.schema.messages import HumanMessage
-import vertexai
 from groq import Groq
 import base64
 
@@ -25,6 +22,7 @@ os.environ["GOOGLE_PROJECT_ID"]=os.getenv('GOOGLE_PROJECT_ID')
 
 
 llm_model="llama-3.1-70b-versatile"
+vision_model="llava-v1.5-7b-4096-preview"
 embedding_model="models/text-embedding-004"
 vector_store_index_name="manifesto"
 search_k=10
@@ -35,21 +33,12 @@ embeddings=GoogleGenerativeAIEmbeddings(model=embedding_model)
 
 retriever=PineconeVectorStore(embedding=embeddings, index_name=vector_store_index_name).as_retriever(search_kwargs={"k": search_k})
 
-vertexai.init(project=os.getenv('GOOGLE_PROJECT_ID'))
 
 llm=ChatGroq(model=llm_model,
             temperature=0.5,
             max_tokens=None,
             timeout=None)
 
-vision_llm= ChatVertexAI(
-    model="gemini-1.5-pro",
-    temperature=0.2,
-    max_tokens=None,
-    max_retries=6,
-    stop=None,
-    project_id=os.getenv('GOOGLE_PROJECT_ID')
-)
 
 def load_pdf(path):
     manifesto_data=PyPDFLoader(path).load()
@@ -135,7 +124,7 @@ def convert_img_to_text(uploaded_image_file):
                     ],
                 }
             ],
-            model="llava-v1.5-7b-4096-preview",
+            model=vision_model,
         )   
 
         return chat_completion.choices[0].message.content

@@ -51,6 +51,7 @@ def generate_node(state:State):
 work_flow=StateGraph(State)
 work_flow.add_node("retrieve_node", retrieve_node)
 work_flow.add_node("generate_node", generate_node)
+
 work_flow.add_edge(START, "retrieve_node")
 work_flow.add_edge("retrieve_node", "generate_node")
 work_flow.add_edge("generate_node", END)
