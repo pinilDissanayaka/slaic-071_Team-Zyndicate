@@ -5,6 +5,7 @@ from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
 from typing import TypedDict, List
 
+
 class FactChecker(TypedDict):
     claim: str
     party: str
@@ -99,4 +100,6 @@ def fact_checker(party:str, claim:str):
    global percentage_response
 
    return verdict_response, percentage_response   
+
+
 

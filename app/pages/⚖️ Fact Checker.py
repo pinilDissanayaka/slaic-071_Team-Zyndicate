@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 from utils.factchecker import fact_checker
-from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store
+from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, convert_img_to_text
 
 temp_file_path="temp/"
 
@@ -31,9 +31,21 @@ selected_party = st.selectbox(
     ("National People's Power | NPP", "Samagi Jana Balawegaya | SJB", "Sri Lanka Podujana Peramuna | SLPP", "NDC", "CPP", "PPP", "GUM", "GFP", "GCPP", "APC", "PNC", "LPG", "NDP", "Independent")
 )
 
-claim = st.text_area("Enter the claim as text to fact check :")
+text_claim = st.text_area("Enter the claim as text to fact check :")
 
-if claim and selected_party:
+st.write("or")
+
+uploaded_image_file = st.file_uploader("Choose a PDF, TXT, JPEG or PNG files", accept_multiple_files=False)
+
+if uploaded_image_file:
+    with st.spinner("Extracting..."):
+        image_claim=convert_img_to_text(uploaded_image_file=uploaded_image_file)
+        st.write("Text extracted from uploaded file.")
+        st.write(image_claim)
+
+
+if text_claim or image_claim and selected_party:
+    claim=text_claim + image_claim
     if st.button("Fact Check"):
         with st.spinner("Thinking..."):
             generated_response, evaluation_response=fact_checker(claim=claim, party=selected_party)
