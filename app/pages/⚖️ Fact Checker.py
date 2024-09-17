@@ -31,6 +31,9 @@ selected_party = st.selectbox(
     ("National People's Power | NPP", "Samagi Jana Balawegaya | SJB", "Sri Lanka Podujana Peramuna | SLPP", "NDC", "CPP", "PPP", "GUM", "GFP", "GCPP", "APC", "PNC", "LPG", "NDP", "Independent")
 )
 
+image_claim=" "
+text_claim=" "
+
 text_claim = st.text_area("Enter the claim as text to fact check :")
 
 st.write("or")
@@ -47,7 +50,7 @@ if uploaded_image_file:
 if image_claim or text_claim:
     claim=image_claim+" "+text_claim
 
-if claim or image_claim and selected_party:
+if claim and selected_party:
     if st.button("Fact Check"):
         with st.spinner("Thinking..."):
             generated_response, evaluation_response=fact_checker(claim=claim, party=selected_party)

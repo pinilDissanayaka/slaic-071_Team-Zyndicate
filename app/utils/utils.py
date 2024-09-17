@@ -125,7 +125,7 @@ def convert_img_to_text(uploaded_image_file):
                 {
                     "role": "user",
                     "content": [
-                        {"type": "text", "text": "Please extract and display all visible text from the image. Ensure the text is captured exactly as it appears, including any formatting, spacing, and special characters. If the image contains text in multiple areas or sections, maintain the relative structure and order in which the text appears."},
+                        {"type": "text", "text": "Please extract and display all visible text from the image dont extract images. Ensure the text is captured exactly as it appears, including any formatting, spacing, and special characters. If the image contains text in multiple areas or sections, maintain the relative structure and order in which the text appears."},
                         {
                             "type": "image_url",
                             "image_url": {
