@@ -2,7 +2,7 @@ import os
 import streamlit as st
 from st_audiorec import st_audiorec
 from utils.factchecker import fact_checker
-from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, convert_img_to_text
+from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, convert_img_to_text, stream_text
 
 temp_file_path="temp/"
 
@@ -62,6 +62,6 @@ if claim and selected_party:
         with st.spinner("Thinking..."):
             generated_response, evaluation_response=fact_checker(claim=claim, party=selected_party)
             st.write("---------------------------------------------------------------------------------------------------------------")
-            st.write(generated_response)
+            st.write_stream(stream_text(generated_response))
             st.write("---------------------------------------------------------------------------------------------------------------")
             st.write(evaluation_response)

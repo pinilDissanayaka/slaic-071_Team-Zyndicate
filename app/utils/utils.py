@@ -8,6 +8,7 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from groq import Groq
+from time import sleep
 import base64
 
 load_dotenv()
@@ -133,3 +134,8 @@ def convert_img_to_text(uploaded_image_file):
         logging.exception(e)
         
 
+def stream_text(text:str):
+    for word in text.split(" "):
+        yield word + " "
+        sleep(0.002)
+        
