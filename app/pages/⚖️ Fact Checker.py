@@ -43,7 +43,7 @@ voice_claim_data = audiorecorder("Click to record", "Click to stop recording")
 
 if len(voice_claim_data) > 0:
     # To play audio in frontend:
-    st.audio(audio.export().read())  
+    st.audio(voice_claim_data.export().read())  
 
     # To save audio to a file, use pydub export method:
     voice_claim_data.export("audio.wav", format="wav")
@@ -52,11 +52,9 @@ if len(voice_claim_data) > 0:
     st.write(f"Frame rate: {voice_claim_data.frame_rate}, Frame width: {voice_claim_data.frame_width}, Duration: {voice_claim_data.duration_seconds} seconds")
 
 
-st.write(voice_claim_data)
-
 if voice_claim_data is not None:
     with st.spinner("Extracting..."):
-        st.write(voice_claim_data)
+        pass
 
 st.write("or")
 
