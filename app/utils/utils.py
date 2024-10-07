@@ -134,8 +134,8 @@ def convert_img_to_text(uploaded_image_file):
         logging.exception(e)
         
 
-def stream_text(text:str):
+def stream_text(text:str, delay:0.02):
     for word in text.split(" "):
         yield word + " "
-        sleep(0.002)
+        sleep(delay)
         
