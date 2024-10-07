@@ -1,5 +1,6 @@
 import os
 import streamlit as st
+from st_audiorec import st_audiorec
 from utils.factchecker import fact_checker
 from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, convert_img_to_text
 
@@ -35,6 +36,12 @@ image_claim=" "
 text_claim=" "
 
 text_claim = st.text_area("Enter the claim as text to fact check :")
+
+voice_claim_data = st_audiorec()
+
+if voice_claim_data:
+    with st.spinner("Extracting..."):
+        pass
 
 st.write("or")
 
