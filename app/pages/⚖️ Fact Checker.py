@@ -1,6 +1,6 @@
 import os
 import streamlit as st
-from st_audiorec import st_audiorec
+from audiorecorder import audiorecorder
 from utils.factchecker import fact_checker
 from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, convert_img_to_text, stream_text
 
@@ -39,7 +39,18 @@ text_claim = st.text_area("Enter the claim as text to fact check :")
 
 st.write("or")
 
-voice_claim_data = st_audiorec()
+voice_claim_data = audiorecorder("Click to record", "Click to stop recording")
+
+if len(voice_claim_data) > 0:
+    # To play audio in frontend:
+    st.audio(audio.export().read())  
+
+    # To save audio to a file, use pydub export method:
+    voice_claim_data.export("audio.wav", format="wav")
+
+    # To get audio properties, use pydub AudioSegment properties:
+    st.write(f"Frame rate: {voice_claim_data.frame_rate}, Frame width: {voice_claim_data.frame_width}, Duration: {voice_claim_data.duration_seconds} seconds")
+
 
 st.write(voice_claim_data)
 
