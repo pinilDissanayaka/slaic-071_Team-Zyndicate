@@ -67,6 +67,9 @@ def store(doc_splits, index_name=vector_store_index_name):
 
 def load_into_vector_store(directory=temp_dir):
     try:
+        if not os.path.exists(directory):
+            os.mkdir(directory)
+
         list_of_dirs=os.listdir(directory)
     
         for dir in list_of_dirs:
@@ -75,27 +78,34 @@ def load_into_vector_store(directory=temp_dir):
                 store(split(load_pdf(relative_path)))
             elif os.path.splitext(dir)[1] == 'txt':
                 store(split(load_txt(relative_path)))
+        if os.path.exists(directory):
+            os.remove(directory)
     except Exception as e:
-        logging.exception(e)
+        st.exception(e)
             
             
             
 def save_pdf_txt_on_temp_dir(uploaded_file, temp_file_path=temp_dir):
     try:
+        if not os.path.exists(temp_dir):
+            os.mkdir(temp_dir)
+
         file_path=os.path.join(temp_file_path, uploaded_file.name)
         with open(file_path, 'wb') as file_to_write:
             file_to_write.write(uploaded_file.read())
     except Exception as e:
-        logging.exception(e)
+        st.exception(e)
         
 def save_img_on_dir(uploaded_image_file, temp_file_path=temp_dir):
     try:
+        if not os.path.exists(temp_file_path):
+            os.mkdir(temp_file_path)
         file_path=os.path.join(temp_file_path, uploaded_image_file.name)
         with open(file_path, 'wb') as file_to_write:
             file_to_write.write(uploaded_image_file.read())
         return file_path
     except Exception as e:
-        logging.exception(e)
+        st.exception(e)
     
             
             
@@ -103,6 +113,7 @@ def encode_image(image_path):
     if image_path:
         with open(image_path, "rb") as image_file:
             return base64.b64encode(image_file.read()).decode('utf-8')
+    
 
 def convert_img_to_text(uploaded_image_file):
     try:
@@ -128,14 +139,16 @@ def convert_img_to_text(uploaded_image_file):
             ],
             model=vision_model,
         )   
+        
+        if os.path.exists(image_path):
+            os.remove(image_path)
 
         return chat_completion.choices[0].message.content
     except Exception as e:
-        logging.exception(e)
+        st.exception(e)
         
 
 def stream_text(text:str, delay=0.01):
     for word in text.split(" "):
         yield word + " "
         sleep(delay)
-        

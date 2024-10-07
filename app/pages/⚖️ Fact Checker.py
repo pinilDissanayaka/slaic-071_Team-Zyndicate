@@ -37,11 +37,13 @@ text_claim=" "
 
 text_claim = st.text_area("Enter the claim as text to fact check :")
 
+st.write("or")
+
 voice_claim_data = st_audiorec()
 
 if voice_claim_data is not None:
     with st.spinner("Extracting..."):
-        pass
+        st.write(voice_claim_data)
 
 st.write("or")
 
