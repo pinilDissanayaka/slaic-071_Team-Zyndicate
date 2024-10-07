@@ -64,4 +64,4 @@ if claim and selected_party:
             st.write("---------------------------------------------------------------------------------------------------------------")
             st.write_stream(stream_text(generated_response))
             st.write("---------------------------------------------------------------------------------------------------------------")
-            st.write(evaluation_response)
+            st.write_stream(stream_text(evaluation_response))

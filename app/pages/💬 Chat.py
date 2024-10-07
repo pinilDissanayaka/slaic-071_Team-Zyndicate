@@ -1,6 +1,6 @@
 import streamlit as st
 from utils.chatbot import chat_with_manifesto
-from utils.utils import load_into_vector_store, save_pdf_txt_on_temp_dir
+from utils.utils import load_into_vector_store, save_pdf_txt_on_temp_dir, stream_text
 
 
 def clear_state():
@@ -56,7 +56,7 @@ if st.session_state.messages[-1]["role"] != "assistant":
     with st.chat_message("assistant"):
         with st.spinner("Thinking..."):
             response = generate_response(prompt) 
-            st.write(response) 
+            st.write_stream(stream_text(response))
     message = {"role": "assistant", "content": response}
     st.session_state.messages.append(message)
 
