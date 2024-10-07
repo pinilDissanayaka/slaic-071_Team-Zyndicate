@@ -41,6 +41,8 @@ st.write("or")
 
 voice_claim_data = st_audiorec()
 
+st.write(voice_claim_data)
+
 if voice_claim_data is not None:
     with st.spinner("Extracting..."):
         st.write(voice_claim_data)
