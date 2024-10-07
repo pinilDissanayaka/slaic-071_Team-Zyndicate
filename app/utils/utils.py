@@ -14,7 +14,7 @@ load_dotenv()
 
 
 os.environ['GOOGLE_API_KEY']=st.secrets['GOOGLE_API_KEY']
-os.environ['PINECONE_API_KEY']==st.secrets['PINECORN_API_KEY']
+os.environ['PINECONE_API_KEY']==st.secrets['PINECONE_API_KEY']
 os.environ['GROQ_API_KEY']==st.secrets['GROQ_API_KEY']
 os.environ['LANGCHAIN_API_KEY']==st.secrets['LANGCHAIN_API_KEY']
 os.environ['LANGCHAIN_TRACING_V2']='true'
