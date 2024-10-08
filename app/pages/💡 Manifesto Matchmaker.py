@@ -52,10 +52,9 @@ if list_of_policies:
 t=st.text_input("enter")
 
 if t:
-    generated_response=get_align_candidate(t)
-    st.write(generated_response)
-    
-    draw_pie_plot(labels=generated_response.candidate, sizes= generated_response.score)
+    candidate, score, manifesto=get_align_candidate(t)
+        
+    draw_pie_plot(labels=candidate, sizes= score)
     
     st.pyplot(get_align_candidate(t)[-1])
 
