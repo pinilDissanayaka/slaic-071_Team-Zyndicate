@@ -59,7 +59,7 @@ if selected_themes:
             st.subheader(theme)
             themes[theme]=st.multiselect(label="Select Your Topics", options=get_topics(theme))
             
-    if uploaded_files:
+    if themes:
         with st.spinner("Processing..."):
             for theme in themes:
                 with st.expander(theme):
