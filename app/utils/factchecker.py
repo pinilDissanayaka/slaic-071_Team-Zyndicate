@@ -86,8 +86,6 @@ def fact_verdict_node(fact:FactChecker):
 
 def web_search_tool(face:FactChecker):
     structured_llm_router = llm.with_structured_output(RouteQuery)
-    
-    
 
 
 
