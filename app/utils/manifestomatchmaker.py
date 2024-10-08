@@ -42,7 +42,7 @@ def generate_node(state:Graph_State):
     Don't try to make up an answer.
     """
     
-    structured_llm=llm.with_structured_output(Topic)
+    structured_llm=llm.with_structured_output(Topic, method="json_mode")
 
     get_relevant_policies_prompt=ChatPromptTemplate.from_template(get_relevant_policies_prompt_template)
 
