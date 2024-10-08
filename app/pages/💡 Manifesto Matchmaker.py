@@ -51,20 +51,17 @@ if list_of_policies:
 
 t=st.text_input("enter")
 
-if t:
-    column1, column2= st.columns(2)
-    
+if t:    
     candidates, scores, manifesto=get_align_candidate(t)
     
-    with column1:
-        st.subheader("Which Presidential Candidate Aligns Most with Your Policy Choices?")
-        pie_plot=draw_pie_plot(labels=candidates, sizes= scores)
-        st.pyplot(pie_plot)
-        
-    with column2:
-        st.subheader("Your Manifesto Aligns...")
-        for candidate, score in zip(candidates, scores):
-            st.write_stream(stream=stream_text(text=f"{score * 100} % with {candidate} policy."))
+    st.write("-----------------------------------------------------------------------------------------------------------")
+    st.subheader("Which Presidential Candidate Aligns Most with Your Policy Choices?")
+    pie_plot=draw_pie_plot(labels=candidates, sizes= scores)
+    st.pyplot(pie_plot)
+    st.write("-----------------------------------------------------------------------------------------------------------")
+    st.subheader("Your Manifesto Aligns...")
+    for candidate, score in zip(candidates, scores):
+        st.write_stream(stream=stream_text(text=f"{score * 100} % with {candidate} policy."))
             
     st.write("-----------------------------------------------------------------------------------------------------------")
     st.subheader("Here is a Breakdown of Your Manifesto")
