@@ -43,9 +43,9 @@ if selected_themes:
             list_of_policies.append(get_relevant_policies(selected_theme))
 
 
-for index, list_of_policy in enumerate(list_of_policies):
-    with st.expander(selected_themes[index]):
-        st.write(list_of_policy)
+    for index, list_of_policy in enumerate(list_of_policies):
+        with st.expander(selected_themes[index]):
+            st.write(list_of_policy)
 
 
 
