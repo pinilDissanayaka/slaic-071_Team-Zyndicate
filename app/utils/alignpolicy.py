@@ -12,10 +12,11 @@ class Graph_State(TypedDict):
   generation: str
   policies: List[str]
   
-class Topic(BaseModel):
-    policies: List[str]=Field(description="policies related to the topic")
-  
-generated_response:Topic
+class Candidate(BaseModel):
+    candidate: List[str]=Field(description="Which Presidential Candidates Aligns Most with Your Policy Choices")
+    score:List[float]=Field(description="Alignment Score")
+    manifesto:List[str]=Field(description="Manifesto")
+generated_response:Candidate
 
 def retrieve_node(state:Graph_State):
   retrieved_documents=retriever.invoke(state['policies'])
@@ -40,12 +41,14 @@ def generate_node(state:Graph_State):
     
 
     get_align_candidate_prompt=ChatPromptTemplate.from_template(get_align_candidate_prompt_template)
+    
+    structured_llm=llm.with_structured_output(Candidate)
 
 
     get_relevant_policies_prompt_chain = (
     {"CONTEXT": RunnablePassthrough(), "POLICIES": RunnablePassthrough()}   
     | get_align_candidate_prompt
-    | llm
+    | structured_llm
     )
 
     generation=get_relevant_policies_prompt_chain.invoke({"CONTEXT": state["documents"], "POLICIES": state["policies"]})
@@ -77,4 +80,4 @@ def get_align_candidate(policies):
     
     global generated_response
 
-    return generated_response
+    return generated_response.candidate, generated_response.score, generated_response.manifesto
