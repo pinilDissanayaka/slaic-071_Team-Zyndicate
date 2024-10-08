@@ -14,9 +14,9 @@ class Graph_State(TypedDict):
   policies: List[str]
   
 class Candidate(BaseModel):
-    candidate: List[str]=Field(description="Which Presidential Candidates Aligns Most with Your Policy Choices")
-    score:List[float]=Field(description="Alignment Score")
-    manifesto:List[str]=Field(description="In their manifesto, what the candidate's policies align with your policy choices")
+    candidates: List[str]=Field(description="Which Presidential Candidates Aligns Most with Your Policy Choices")
+    scores:List[float]=Field(description="Alignment Score")
+    manifestos:List[str]=Field(description="In their manifesto, what the candidate's policies align with your policy choices")
 generated_response:Candidate
 
 def retrieve_node(state:Graph_State):
@@ -89,4 +89,4 @@ def get_align_candidate(policies):
     global generated_response
 
 
-    return generated_response.candidate, generated_response.score, generated_response.manifesto
+    return generated_response.candidates, generated_response.scores, generated_response.manifestos
