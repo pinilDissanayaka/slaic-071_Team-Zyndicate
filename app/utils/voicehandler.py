@@ -8,7 +8,7 @@ os.environ['GROQ_API_KEY']=st.secrets['GROQ_API_KEY']
 temp_dir="temp"
 
 
-def save_voice_on_dir(wav_audio_data, file_name, folder=temp_dir):
+def save_voice_on_dir(wav_audio_data, file_name, folder=temp_dir, format=".wav"):
     try:
         if os.path.exists(folder):
             os.mkdir(folder)

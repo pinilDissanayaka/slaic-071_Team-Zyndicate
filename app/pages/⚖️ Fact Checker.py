@@ -3,6 +3,7 @@ import streamlit as st
 from st_audiorec import st_audiorec
 from utils.factchecker import fact_checker
 from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, convert_img_to_text, stream_text
+from utils.voicehandler import save_voice_on_dir, voice_to_text
 
 temp_file_path="temp/"
 
@@ -43,6 +44,7 @@ wav_audio_data = st_audiorec()
 
 if wav_audio_data is not None:
     st.audio(wav_audio_data, format='audio/wav')
+    audio_claim=voice_to_text(voice_file_path=save_voice_on_dir(wav_audio_data=wav_audio_data, file_name="output"))
 
 st.write("or")
 
