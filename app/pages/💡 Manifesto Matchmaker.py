@@ -1,7 +1,6 @@
 import os
 import streamlit as st
 from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, stream_text
-from utils.topics import get_topics
 from utils.manifestomatchmaker import get_relevant_policies
 
 temp_file_path="temp/"
@@ -32,17 +31,19 @@ with st.sidebar:
 st.title("💡 Manifesto Matchmaker")
 st.write("-----------------------------------------------------------------------------------------------------------") 
 
-st.text("Select Your Themes", help="Every promise has an associated topic. In this section, select which topics you wish to focus on, under each of your chosen themes. A topic is a distinct subject area that classifies individual promises. Each theme has multiple topics, though not all topics are represented under every theme.")
 
-selected_themes=st.multiselect(label="", 
-                               options=["Infrastructure", "Social Protection", "Trade and Export", "Labour", "Governance", "Law and Order", "Corruption", "Agriculture", "Health", "Taxation", "Education", "Supplementary", "Economic Growth", "IMF Programme", "Reconciliation"]
+
+selected_themes=st.multiselect(label="Select Your Themes", 
+                               options=["Infrastructure", "Social Protection", "Trade and Export", "Labour", "Governance", "Law and Order", "Corruption", "Agriculture", "Health", "Taxation", "Education", "Supplementary", "Economic Growth", "IMF Programme", "Reconciliation"], 
+                               help="Every promise has an associated topic. In this section, select which topics you wish to focus on, under each of your chosen themes. A topic is a distinct subject area that classifies individual promises. Each theme has multiple topics, though not all topics are represented under every theme."
                                )
 
 if selected_themes:
     with st.spinner("Processing..."):
         for selected_theme in selected_themes:
             with st.expander(selected_theme, expanded=True):
-                st.write(get_relevant_policies(topic=selected_theme))
-            
+                policies=get_relevant_policies(topic=selected_theme)
+                
+
 
 
