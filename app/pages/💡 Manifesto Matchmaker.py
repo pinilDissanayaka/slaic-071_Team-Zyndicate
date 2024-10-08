@@ -64,7 +64,7 @@ if t:
     with column2:
         st.subheader("Your Manifesto Aligns...")
         for candidate, score in zip(candidates, scores):
-            st.write(f"{score} with {candidate} policy.")
+            st.write(f"{score * 100} with {candidate} policy.")
         
 
 
