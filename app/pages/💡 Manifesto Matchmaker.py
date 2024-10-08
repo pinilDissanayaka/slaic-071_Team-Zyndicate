@@ -42,7 +42,7 @@ if "selected_themes" not in st.session_state:
     st.session_state["selected_themes"]=selected_themes
 
 if selected_themes:
-    st.page_link(page="tabs/select.py", label="next")
+    st.page_link(page="pages/select.py", label="next")
 
 
 
