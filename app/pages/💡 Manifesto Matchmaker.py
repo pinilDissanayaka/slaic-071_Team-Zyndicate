@@ -53,6 +53,8 @@ t=st.text_input("enter")
 
 if t:
     st.write(get_align_candidate(t))
+    
+    st.pyplot(get_align_candidate(t)[-1])
 
 
 
