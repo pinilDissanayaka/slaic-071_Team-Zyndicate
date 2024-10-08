@@ -83,3 +83,5 @@ def get_relevant_policies(topic:str):
     global generated_response
 
     return generated_response.policies
+
+
