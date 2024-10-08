@@ -31,18 +31,14 @@ with st.sidebar:
 st.title("💡 Manifesto Matchmaker")
 st.write("-----------------------------------------------------------------------------------------------------------") 
 
-
-
 selected_themes=st.multiselect(label="Select Your Themes", 
                                options=["Infrastructure", "Social Protection", "Trade and Export", "Labour", "Governance", "Law and Order", "Corruption", "Agriculture", "Health", "Taxation", "Education", "Supplementary", "Economic Growth", "IMF Programme", "Reconciliation"], 
                                help="Every promise has an associated topic. In this section, select which topics you wish to focus on, under each of your chosen themes. A topic is a distinct subject area that classifies individual promises. Each theme has multiple topics, though not all topics are represented under every theme."
                                )
 
-if "selected_themes" not in st.session_state:
-    st.session_state["selected_themes"]=selected_themes
-
 if selected_themes:
-    st.page_link(page="pages/select.py", label="next")
+    with st.spinner("Processing..."):
+        st.button("Get Relevant Policies", on_click=get_relevant_policies(selected_themes))
 
 
 
