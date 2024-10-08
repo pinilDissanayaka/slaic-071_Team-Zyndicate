@@ -2,6 +2,7 @@ import os
 import streamlit as st
 from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, stream_text
 from utils.topics import get_topics
+from utils.manifestomatchmaker import get_relevant_policies
 
 temp_file_path="temp/"
 
@@ -48,6 +49,7 @@ if selected_themes:
 
     with col1:
         for theme in themes_col1:
+            st.write(get_relevant_policies(topic=theme))
             st.subheader(theme)
             st.multiselect(label="Select Your Topics", options=get_topics(theme))
     
@@ -55,6 +57,7 @@ if selected_themes:
         for theme in themes_col2:
             st.subheader(theme)
             st.multiselect(label="Select Your Topics", options=get_topics(theme))
+            
         
         
         
