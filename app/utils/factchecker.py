@@ -3,8 +3,10 @@ from langchain.prompts import ChatPromptTemplate
 from langgraph.graph import END, StateGraph, START
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.output_parsers import StrOutputParser
-from typing import TypedDict, List
+from typing import TypedDict, Literal, List
+from pydantic import BaseModel, Field
 
+response:str
 
 class FactChecker(TypedDict):
     claim: str
@@ -12,8 +14,11 @@ class FactChecker(TypedDict):
     score: str
     verdict: str
     documents: List[str]
-
-response:str
+    
+class RouteQuery(BaseModel):
+    data_source: Literal["vectorstore", "web_search"] = Field(
+        ...,
+        description="Given a user question choose to route it to web search or a vectorstore.",)
 
 def fact_retrieve_node(fact:FactChecker):
     question=f'''Retrieve relevant documents from the vector database based on the following inputs: {fact['claim']} and a 
@@ -78,6 +83,12 @@ def fact_verdict_node(fact:FactChecker):
     verdict_response=verdict_chain.invoke({"SCORE": fact["score"], "PARTY": fact["party"]})
     
     return {'verdict' : verdict_response}
+
+def web_search_tool(face:FactChecker):
+    structured_llm_router = llm.with_structured_output(RouteQuery)
+    
+    
+
 
 
 factFlow=StateGraph(FactChecker)
