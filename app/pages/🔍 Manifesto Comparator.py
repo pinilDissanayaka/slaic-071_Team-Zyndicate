@@ -23,7 +23,7 @@ with st.sidebar:
     
     if uploaded_files:
         with st.spinner("Processing..."):
-            st.button("Upload to vector store.", on_click=load_into_vector_store)
+            st.button("Upload to vector store.", on_click=load_into_vector_store())
             
 st.title("🔍 Manifesto Comparator")
 st.write("-----------------------------------------------------------------------------------------------------------")
