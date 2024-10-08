@@ -57,8 +57,8 @@ if uploaded_image_file:
     st.write(image_claim)
     
 
-if image_claim or text_claim:
-    claim=image_claim+" "+text_claim
+if image_claim or text_claim or audio_claim:
+    claim=image_claim+" "+text_claim +" "+audio_claim
 
 if claim and selected_party:
     if st.button("Fact Check"):
