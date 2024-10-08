@@ -64,5 +64,5 @@ if selected_themes:
 if st.button("Get Relevant Policies"):
     for theme in topics:
         for topic in topics[theme]:
-            get_relevant_policies(topic=topic)
+            st.write(get_relevant_policies(topic=topic))
 
