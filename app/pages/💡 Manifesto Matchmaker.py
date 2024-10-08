@@ -40,10 +40,15 @@ selected_themes=st.multiselect(label="Select Your Themes",
 
 if selected_themes:
     with st.spinner("Processing..."):
+        selected_policies=list()
         for selected_theme in selected_themes:
             with st.expander(selected_theme, expanded=True):
                 policies=get_relevant_policies(topic=selected_theme)
-                
+                selected_policies.append(st.multiselect(label="Select Policies", 
+                                                        options=policies
+                                                        )
+                )
+
 
 
 
