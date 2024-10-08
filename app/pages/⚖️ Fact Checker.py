@@ -51,20 +51,6 @@ text = speech_to_text(
     key=None
 )
 
-if len(voice_claim_data) > 0:
-    # To play audio in frontend:
-    st.audio(voice_claim_data.export().read())  
-
-    # To save audio to a file, use pydub export method:
-    voice_claim_data.export("audio.wav", format="wav")
-
-    # To get audio properties, use pydub AudioSegment properties:
-    st.write(f"Frame rate: {voice_claim_data.frame_rate}, Frame width: {voice_claim_data.frame_width}, Duration: {voice_claim_data.duration_seconds} seconds")
-
-
-if voice_claim_data is not None:
-    with st.spinner("Extracting..."):
-        pass
 
 st.write("or")
 
