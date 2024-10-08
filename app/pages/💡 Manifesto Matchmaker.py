@@ -45,21 +45,24 @@ if selected_themes:
     half_point = len(selected_themes) // 2
     
     themes_col1 = selected_themes[:half_point] 
-    themes_col2 = selected_themes[half_point:]  
+    themes_col2 = selected_themes[half_point:]
+    
+    topics={}
 
     with col1:
         for theme in themes_col1:
-            st.write(get_relevant_policies(topic=theme))
             st.subheader(theme)
-            st.multiselect(label="Select Your Topics", options=get_topics(theme))
+            topics[theme]=st.multiselect(label="Select Your Topics", options=get_topics(theme))
     
     with col2:
         for theme in themes_col2:
             st.subheader(theme)
-            st.multiselect(label="Select Your Topics", options=get_topics(theme))
+            topics[theme]=st.multiselect(label="Select Your Topics", options=get_topics(theme))
             
-        
-        
-        
-        
+            
+
+if st.button("Get Relevant Policies"):
+    for theme in topics:
+        for topic in topics[theme]:
+            get_relevant_policies(topic=topic)
 
