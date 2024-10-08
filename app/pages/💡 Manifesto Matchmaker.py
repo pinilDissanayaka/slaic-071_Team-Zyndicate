@@ -35,6 +35,6 @@ selected_themes=st.multiselect(label="Select Your Themes",
                                help="We have categorized all presidential candidate manifesto promises into 15 distinct themes. In this section, you have to select which themes you wish to prioritize in your manifesto. A theme is a core policy area that captures a large number of promises. Select all the themes you wish to prioritize in your manifesto. You can select multiple themes.")
 
 if selected_themes:
-    with st.spinner("Generating Manifesto !"):
-        st.button("Generate Manifesto.", on_click=stream_text(selected_themes))
+    for selected_theme in selected_themes:
+        theme_cols=st.columns(len(selected_themes))
 
