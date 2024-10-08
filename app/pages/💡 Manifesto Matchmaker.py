@@ -47,18 +47,23 @@ if selected_themes:
     themes_col1 = selected_themes[:half_point] 
     themes_col2 = selected_themes[half_point:]
     
-    topics={}
+    themes={}
 
     with col1:
         for theme in themes_col1:
             st.subheader(theme)
-            topics[theme]=st.multiselect(label="Select Your Topics", options=get_topics(theme))
+            themes[theme]=st.multiselect(label="Select Your Topics", options=get_topics(theme))
             st.write(get_relevant_policies(topic=theme))
-    
     with col2:
         for theme in themes_col2:
             st.subheader(theme)
-            topics[theme]=st.multiselect(label="Select Your Topics", options=get_topics(theme))
+            themes[theme]=st.multiselect(label="Select Your Topics", options=get_topics(theme))
+            
+    if uploaded_files:
+        with st.spinner("Processing..."):
+            for theme in themes:
+                with st.expander(theme):
+                    st.write(get_relevant_policies(topic=theme))
             
 
 
