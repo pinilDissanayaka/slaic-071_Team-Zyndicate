@@ -45,7 +45,6 @@ st.write("or")
 wav_audio_data = st_audiorec()
 
 if wav_audio_data is not None:
-    st.audio(wav_audio_data, format='audio/wav')
     audio_claim=voice_to_text(voice_file_path=save_voice_on_dir(wav_audio_data=wav_audio_data, file_name="output"))
 
 st.write("or")
