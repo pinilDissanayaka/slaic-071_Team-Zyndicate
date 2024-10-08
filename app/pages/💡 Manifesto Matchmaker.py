@@ -38,15 +38,11 @@ selected_themes=st.multiselect(label="Select Your Themes",
                                help="Every promise has an associated topic. In this section, select which topics you wish to focus on, under each of your chosen themes. A topic is a distinct subject area that classifies individual promises. Each theme has multiple topics, though not all topics are represented under every theme."
                                )
 
+if "selected_themes" not in st.session_state:
+    st.session_state["selected_themes"]=selected_themes
+
 if selected_themes:
-    selected_policies=list()
-    for selected_theme in selected_themes:
-        with st.expander(selected_theme, expanded=True):
-            policies=get_relevant_policies(topic=selected_theme)
-            selected_policies.append(st.multiselect(label="Select Policies", 
-                                                        options=policies
-                                                    )
-                                    )
+    st.page_link(page="tabs/select.py", label="next")
 
 
 
