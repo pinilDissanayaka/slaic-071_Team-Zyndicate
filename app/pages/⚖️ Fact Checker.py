@@ -51,6 +51,7 @@ text = speech_to_text(
     key=None
 )
 
+st.write(text)
 
 st.write("or")
 
