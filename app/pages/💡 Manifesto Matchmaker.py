@@ -64,8 +64,12 @@ if t:
     with column2:
         st.subheader("Your Manifesto Aligns...")
         for candidate, score in zip(candidates, scores):
-            st.write(f"{score * 100} with {candidate} policy.")
-        
+            st.write_stream(stream=stream_text(text=f"{score * 100} with {candidate} policy."))
+            
+    st.write("-----------------------------------------------------------------------------------------------------------")
+    st.subheader("Here is a Breakdown of Your Manifesto")
+    st.write_stream(stream=stream_text(text=manifesto))
+    st.write("-----------------------------------------------------------------------------------------------------------")
 
 
 
