@@ -60,9 +60,9 @@ if selected_themes:
             
     if themes:
         with st.spinner("Processing..."):
-            for theme in themes:
+            for theme in themes.keys():
                 with st.expander(theme):
-                    st.write(get_relevant_policies(topic=theme))
+                    st.write(get_relevant_policies(topic=themes['theme']))
             
 
 
