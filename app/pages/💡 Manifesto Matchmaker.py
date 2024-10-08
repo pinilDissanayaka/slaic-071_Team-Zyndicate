@@ -48,7 +48,7 @@ if selected_themes:
     themes_col2 = selected_themes[half_point:]
     
     themes=None
-
+    
     with col1:
         for theme in themes_col1:
             st.subheader(theme)
