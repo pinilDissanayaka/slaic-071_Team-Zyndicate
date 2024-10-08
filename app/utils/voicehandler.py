@@ -48,6 +48,9 @@ def voice_to_text(voice_file_path):
                 language="en",  # Optional
                 temperature=0.0  # Optional
         )
+            
+        if os.path.exists(voice_file_path):
+            os.remove(voice_file_path)
 
         return transcription.text
     except Exception as e:
