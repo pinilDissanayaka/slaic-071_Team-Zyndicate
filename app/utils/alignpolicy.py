@@ -16,7 +16,7 @@ class Graph_State(TypedDict):
 class Candidate(BaseModel):
     candidates: List[str]=Field(description="Which Presidential Candidates Aligns Most with Your Policy Choices")
     scores:List[float]=Field(description="Alignment Score")
-    manifestos:List[str]=Field(description="where the policies in the manifesto align with your policy choices.")
+    manifestos:List[str]=Field(description="which policy statements align with the your policy choices. The order of the policies in the manifesto align with your policy choices.")
 
 generated_response:Candidate
 
