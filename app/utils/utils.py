@@ -1,30 +1,30 @@
 import os
 import logging
+import streamlit as st
 from dotenv import load_dotenv
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_groq.chat_models import ChatGroq
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
-from langchain_google_vertexai import ChatVertexAI
-from langchain.schema.messages import HumanMessage
-import vertexai
 from groq import Groq
+from time import sleep
 import base64
 
 load_dotenv()
 
 
-os.environ['GOOGLE_API_KEY']=os.getenv('GOOGLE_API_KEY')
-os.environ['PINECONE_API_KEY']=os.getenv('PINECORN_API_KEY')
-os.environ['GROQ_API_KEY']=os.getenv('GROQ_API_KEY')
-os.environ['LANGCHAIN_API_KEY']=os.getenv('LANGCHAIN_API_KEY')
+os.environ['GOOGLE_API_KEY']=st.secrets['GOOGLE_API_KEY']
+os.environ['PINECONE_API_KEY']==st.secrets['PINECONE_API_KEY']
+os.environ['GROQ_API_KEY']==st.secrets['GROQ_API_KEY']
+os.environ['LANGCHAIN_API_KEY']==st.secrets['LANGCHAIN_API_KEY']
 os.environ['LANGCHAIN_TRACING_V2']='true'
-os.environ["GOOGLE_API_KEY"]=os.getenv('GOOGLE_API_KEY')
-os.environ["GOOGLE_PROJECT_ID"]=os.getenv('GOOGLE_PROJECT_ID')
+os.environ["GOOGLE_API_KEY"]==st.secrets['GOOGLE_API_KEY']
+os.environ["GOOGLE_PROJECT_ID"]==st.secrets['GOOGLE_PROJECT_ID']
 
 
 llm_model="llama-3.1-70b-versatile"
+vision_model="llava-v1.5-7b-4096-preview"
 embedding_model="models/text-embedding-004"
 vector_store_index_name="manifesto"
 search_k=10
@@ -35,21 +35,12 @@ embeddings=GoogleGenerativeAIEmbeddings(model=embedding_model)
 
 retriever=PineconeVectorStore(embedding=embeddings, index_name=vector_store_index_name).as_retriever(search_kwargs={"k": search_k})
 
-vertexai.init(project=os.getenv('GOOGLE_PROJECT_ID'))
 
 llm=ChatGroq(model=llm_model,
             temperature=0.5,
             max_tokens=None,
             timeout=None)
 
-vision_llm= ChatVertexAI(
-    model="gemini-1.5-pro",
-    temperature=0.2,
-    max_tokens=None,
-    max_retries=6,
-    stop=None,
-    project_id=os.getenv('GOOGLE_PROJECT_ID')
-)
 
 def load_pdf(path):
     manifesto_data=PyPDFLoader(path).load()
@@ -76,6 +67,9 @@ def store(doc_splits, index_name=vector_store_index_name):
 
 def load_into_vector_store(directory=temp_dir):
     try:
+        if not os.path.exists(directory):
+            os.mkdir(directory)
+
         list_of_dirs=os.listdir(directory)
     
         for dir in list_of_dirs:
@@ -84,27 +78,34 @@ def load_into_vector_store(directory=temp_dir):
                 store(split(load_pdf(relative_path)))
             elif os.path.splitext(dir)[1] == 'txt':
                 store(split(load_txt(relative_path)))
+        if os.path.exists(directory):
+            os.remove(directory)
     except Exception as e:
-        logging.exception(e)
+        st.exception(e)
             
             
             
 def save_pdf_txt_on_temp_dir(uploaded_file, temp_file_path=temp_dir):
     try:
+        if not os.path.exists(temp_dir):
+            os.mkdir(temp_dir)
+
         file_path=os.path.join(temp_file_path, uploaded_file.name)
         with open(file_path, 'wb') as file_to_write:
             file_to_write.write(uploaded_file.read())
     except Exception as e:
-        logging.exception(e)
+        st.exception(e)
         
 def save_img_on_dir(uploaded_image_file, temp_file_path=temp_dir):
     try:
+        if not os.path.exists(temp_file_path):
+            os.mkdir(temp_file_path)
         file_path=os.path.join(temp_file_path, uploaded_image_file.name)
         with open(file_path, 'wb') as file_to_write:
             file_to_write.write(uploaded_image_file.read())
         return file_path
     except Exception as e:
-        logging.exception(e)
+        st.exception(e)
     
             
             
@@ -112,6 +113,7 @@ def encode_image(image_path):
     if image_path:
         with open(image_path, "rb") as image_file:
             return base64.b64encode(image_file.read()).decode('utf-8')
+    
 
 def convert_img_to_text(uploaded_image_file):
     try:
@@ -125,7 +127,7 @@ def convert_img_to_text(uploaded_image_file):
                 {
                     "role": "user",
                     "content": [
-                        {"type": "text", "text": "Please extract and display all visible text from the image. Ensure the text is captured exactly as it appears, including any formatting, spacing, and special characters. If the image contains text in multiple areas or sections, maintain the relative structure and order in which the text appears."},
+                        {"type": "text", "text": "Please extract and display all visible text from the image dont extract images. Ensure the text is captured exactly as it appears, including any formatting, spacing, and special characters. If the image contains text in multiple areas or sections, maintain the relative structure and order in which the text appears."},
                         {
                             "type": "image_url",
                             "image_url": {
@@ -135,11 +137,18 @@ def convert_img_to_text(uploaded_image_file):
                     ],
                 }
             ],
-            model="llava-v1.5-7b-4096-preview",
+            model=vision_model,
         )   
+        
+        if os.path.exists(image_path):
+            os.remove(image_path)
 
         return chat_completion.choices[0].message.content
     except Exception as e:
-        logging.exception(e)
+        st.exception(e)
         
 
+def stream_text(text:str, delay=0.01):
+    for word in text.split(" "):
+        yield word + " "
+        sleep(delay)

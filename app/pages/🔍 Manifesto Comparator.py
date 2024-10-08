@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 from utils.comparator import manifesto_comparator
-from utils.utils import load_into_vector_store, save_pdf_txt_on_temp_dir
+from utils.utils import load_into_vector_store, save_pdf_txt_on_temp_dir, stream_text
 
 temp_file_path="temp/"
 
@@ -40,11 +40,9 @@ if candidates and selected_category:
         with st.spinner("Thinking..."):
             generated_response, evaluation_response=manifesto_comparator(domain=selected_category, candidates=candidates)
             
-            st.write(generated_response)
+            st.write_stream(stream_text(generated_response))
             st.write("---------------------------------------------------------------------------------------------------------------")
-            st.write(evaluation_response)
-            
-            
+            st.write_stream(stream_text(evaluation_response))            
 
 
 

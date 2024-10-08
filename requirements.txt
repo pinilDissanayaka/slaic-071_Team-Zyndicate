@@ -7,3 +7,4 @@ langchain_core
 langgraph
 langchain_huggingface
 pypdf
+streamlit-audiorecorder

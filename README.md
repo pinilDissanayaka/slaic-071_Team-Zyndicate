@@ -25,18 +25,6 @@ The Election Insight App is a real-time, AI-powered tool designed to help voters
 - Verified Information: The chatbot is trained on validated election data, ensuring accurate and trustworthy responses.
 - Contextual Answers: Ask complex questions like “Which candidate focuses on climate change?” or “Who has a better track record on healthcare?”
   
-4. Trend Analyzer
-- Election Trend Insights: Stay informed about emerging trends and hot topics by analyzing social media and news coverage of campaigns.
-- Sentiment Analysis: Gain insight into public sentiment on each candidate, giving you a holistic view of the election landscape.
-  
-5. User-Generated Content & Community Insights
-- Voter Engagement: Share opinions, discuss key election topics, and contribute to crowd-sourced fact-checking efforts.
-- Crowd-Sourced Fact Verification: Users can submit claims for verification, enhancing the community-driven fact-checking process.
-  
-6. Customizable Notifications
-- Real-Time Alerts: Stay updated with notifications about manifesto updates, claim verifications, and major campaign events.
-- Candidate Tracker: Follow key events, public appearances, and announcements for each candidate.
-  
 ## 🔧 Tech Stack
 
 - LangChain: Manages the logic and workflow for LLM-powered features like manifesto comparison, fact-checking, and the AI chatbot.
