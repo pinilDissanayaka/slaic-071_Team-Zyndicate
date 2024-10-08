@@ -73,15 +73,6 @@ workflow.add_edge("generate_node", END)
 
 graph=workflow.compile()
 
-def draw_pie_plot(labels, sizes):
-    fig, ax=plt.subplots()
-    ax.pie(sizes, labels=labels, autopct='%1.12f%%', shadow=True)
-    ax.axis('equal')
-    
-    return fig
-    
-
-
 def get_align_candidate(policies):
     for event in graph.stream({"policies": policies}):
       pass
@@ -90,3 +81,10 @@ def get_align_candidate(policies):
 
 
     return generated_response.candidates, generated_response.scores, generated_response.manifestos
+
+def draw_pie_plot(labels, sizes):
+    fig, ax=plt.subplots()
+    ax.pie(sizes, labels=labels, autopct='%1.12f%%')
+    ax.axis('equal')
+    
+    return fig
