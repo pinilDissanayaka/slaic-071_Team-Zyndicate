@@ -47,7 +47,7 @@ if selected_themes:
     themes_col1 = selected_themes[:half_point] 
     themes_col2 = selected_themes[half_point:]
     
-    themes={}
+    themes=None
 
     with col1:
         for theme in themes_col1:
