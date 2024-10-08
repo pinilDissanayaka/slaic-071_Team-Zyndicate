@@ -54,9 +54,9 @@ t=st.text_input("enter")
 if t:
     candidate, score, manifesto=get_align_candidate(t)
         
-    draw_pie_plot(labels=candidate, sizes= score)
+    pie_plot=draw_pie_plot(labels=candidate, sizes= score)
     
-    st.pyplot(get_align_candidate(t)[-1])
+    st.pyplot(pie_plot)
 
 
 
