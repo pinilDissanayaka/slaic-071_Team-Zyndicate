@@ -57,12 +57,12 @@ if t:
     candidates, scores, manifesto=get_align_candidate(t)
     
     with column1:
-        st.header("Which Presidential Candidate Aligns Most with Your Policy Choices?")
+        st.subheader("Which Presidential Candidate Aligns Most with Your Policy Choices?")
         pie_plot=draw_pie_plot(labels=candidates, sizes= scores)
         st.pyplot(pie_plot)
         
     with column2:
-        st.header("Your Manifesto Aligns...")
+        st.subheader("Your Manifesto Aligns...")
         for candidate, score in zip(candidates, scores):
             st.write(f"{score} with {candidate} policy.")
         
