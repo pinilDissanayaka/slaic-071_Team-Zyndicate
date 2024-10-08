@@ -3,11 +3,7 @@ import streamlit as st
 from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, stream_text
 from utils.manifestomatchmaker import get_relevant_policies
 
-temp_file_path="temp/"
-
-image_claim=""
-text_claim=""
-claim=""
+selected_policies=[]
 
 # App title
 st.set_page_config(page_title="🤗💬 Election-Insight-App ")
@@ -45,7 +41,11 @@ if selected_themes:
 
     for index, list_of_policy in enumerate(list_of_policies):
         with st.expander(selected_themes[index]):
-            st.write(list_of_policy)
+            selected_policies.append(st.multiselect(label="Select Policies", 
+                               options=list_of_policy, 
+                               help="Every promise has an associated topic. In this section, select which topics you wish to focus on, under each of your chosen themes. A topic is a distinct subject area that classifies individual promises. Each theme has multiple topics, though not all topics are represented under every theme."
+                               )
+            )
 
 
 
