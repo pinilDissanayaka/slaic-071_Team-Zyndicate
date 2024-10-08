@@ -1,6 +1,7 @@
 import os
 import streamlit as st
-from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, convert_img_to_text, stream_text
+from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, stream_text
+from utils.topics import get_topics
 
 temp_file_path="temp/"
 
@@ -30,11 +31,32 @@ with st.sidebar:
 st.title("💡 Manifesto Matchmaker")
 st.write("-----------------------------------------------------------------------------------------------------------") 
 
-selected_themes=st.multiselect(label="Select Your Themes", 
-                               options=["Infrastructure", "Social Protection", "Trade and Export", "Labour", "Governance", "Law and Order", "Corruption", "Agriculture", "Health", "Taxation", "Education", "Supplementary", "Economic Growth", "IMF Programme", "Reconciliation"],
-                               help="We have categorized all presidential candidate manifesto promises into 15 distinct themes. In this section, you have to select which themes you wish to prioritize in your manifesto. A theme is a core policy area that captures a large number of promises. Select all the themes you wish to prioritize in your manifesto. You can select multiple themes.")
+st.text("Select Your Themes", help="Every promise has an associated topic. In this section, select which topics you wish to focus on, under each of your chosen themes. A topic is a distinct subject area that classifies individual promises. Each theme has multiple topics, though not all topics are represented under every theme.")
+
+selected_themes=st.multiselect(label="", 
+                               options=["Infrastructure", "Social Protection", "Trade and Export", "Labour", "Governance", "Law and Order", "Corruption", "Agriculture", "Health", "Taxation", "Education", "Supplementary", "Economic Growth", "IMF Programme", "Reconciliation"]
+                               )
 
 if selected_themes:
-    for selected_theme in selected_themes:
-        theme_cols=st.columns(len(selected_themes))
+    st.text("Select Your Topics", help="Every promise has an associated topic. In this section, select which topics you wish to focus on, under each of your chosen themes. A topic is a distinct subject area that classifies individual promises. Each theme has multiple topics, though not all topics are represented under every theme.")
+    col1, col2 = st.columns(2)
+    
+    half_point = len(selected_themes) // 2
+    
+    themes_col1 = selected_themes[:half_point] 
+    themes_col2 = selected_themes[half_point:]  
+
+    with col1:
+        for theme in themes_col1:
+            st.subheader(theme)
+            st.multiselect(label="Select Your Topics", options=get_topics(theme))
+    
+    with col2:
+        for theme in themes_col2:
+            st.subheader(theme)
+            st.multiselect(label="Select Your Topics", options=get_topics(theme))
+        
+        
+        
+        
 
