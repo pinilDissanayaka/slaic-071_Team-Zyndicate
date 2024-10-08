@@ -78,8 +78,7 @@ def load_into_vector_store(directory=temp_dir):
                 store(split(load_pdf(relative_path)))
             elif os.path.splitext(dir)[1] == 'txt':
                 store(split(load_txt(relative_path)))
-        if os.path.exists(directory):
-            os.remove(directory)
+
     except Exception as e:
         st.exception(e)
             
@@ -140,15 +139,12 @@ def convert_img_to_text(uploaded_image_file):
             model=vision_model,
         )   
         
-        if os.path.exists(image_path):
-            os.remove(image_path)
-
         return chat_completion.choices[0].message.content
     except Exception as e:
         st.exception(e)
         
 
-def stream_text(text:str, delay=0.01):
+def stream_text(text:str, delay=0.05):
     for word in text.split(" "):
         yield word + " "
         sleep(delay)
