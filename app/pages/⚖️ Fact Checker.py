@@ -7,10 +7,10 @@ from utils.voicehandler import save_voice_on_dir, voice_to_text
 
 temp_file_path="temp/"
 
-image_claim=None
-text_claim=None
-audio_claim=None
-claim=None
+image_claim=""
+text_claim=""
+audio_claim=""
+claim=""
 
 # App title
 st.set_page_config(page_title="🤗💬 Election-Insight-App ")
@@ -59,7 +59,7 @@ if uploaded_image_file:
     st.write(image_claim)
     
 
-if image_claim or text_claim or audio_claim:
+if image_claim != "" or text_claim != "" or audio_claim != "":
     claim=image_claim+" "+text_claim +" "+audio_claim
 
 if claim and selected_party:
