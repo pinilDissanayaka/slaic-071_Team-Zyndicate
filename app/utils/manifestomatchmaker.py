@@ -35,9 +35,11 @@ def generate_node(state:Graph_State):
     get_relevant_policies_prompt_template="""You are an expert in analyzing political manifestos. 
     Given the following manifesto text, identify and extract all the policies related to the topic.
     Provide the policies in a Python list format.
+    Make sure the policies are related to the topic and more meaningful and readable.
     Manifesto Text: {CONTEXT}
     Return the policies related to the topic as a Python list.
-    If the answer is not found in the context, kindly state "I don't know." Don't try to make up an answer.
+    If the answer is not found in the context, kindly state "I don't know." 
+    Don't try to make up an answer.
     """
     
     structured_llm=llm.with_structured_output(Topic)
