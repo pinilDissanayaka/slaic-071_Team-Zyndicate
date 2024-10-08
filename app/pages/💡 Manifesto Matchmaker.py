@@ -39,30 +39,10 @@ selected_themes=st.multiselect(label="",
                                )
 
 if selected_themes:
-    st.text("Select Your Topics", help="Every promise has an associated topic. In this section, select which topics you wish to focus on, under each of your chosen themes. A topic is a distinct subject area that classifies individual promises. Each theme has multiple topics, though not all topics are represented under every theme.")
-    col1, col2 = st.columns(2)
-    
-    half_point = len(selected_themes) // 2
-    
-    themes_col1 = selected_themes[:half_point] 
-    themes_col2 = selected_themes[half_point:]
-    
-    themes = {}
-        
-    with col1:
-        for theme in themes_col1:
-            st.subheader(theme)
-            themes[theme]=st.multiselect(label="Select Your Topics", options=get_topics(theme))
-    with col2:
-        for theme in themes_col2:
-            st.subheader(theme)
-            themes[theme]=st.multiselect(label="Select Your Topics", options=get_topics(theme))
-            
-    if themes:
-        with st.spinner("Processing..."):
-            for theme in themes.keys():
-                with st.expander(theme):
-                    st.write(get_relevant_policies(topic=themes[theme]))
+    with st.spinner("Processing..."):
+        for selected_theme in selected_themes:
+            with st.expander(selected_theme, expanded=True):
+                st.write(get_relevant_policies(topic=selected_theme))
             
 
 
