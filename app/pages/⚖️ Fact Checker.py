@@ -33,8 +33,9 @@ selected_party = st.selectbox(
     ("National People's Power | NPP", "Samagi Jana Balawegaya | SJB", "Sri Lanka Podujana Peramuna | SLPP", "NDC", "CPP", "PPP", "GUM", "GFP", "GCPP", "APC", "PNC", "LPG", "NDP", "Independent")
 )
 
-image_claim=" "
-text_claim=" "
+image_claim=None
+text_claim=None
+audio_claim=None
 
 text_claim = st.text_area("Enter the claim as text to fact check :")
 
