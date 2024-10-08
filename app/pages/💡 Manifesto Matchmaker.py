@@ -37,9 +37,14 @@ selected_themes=st.multiselect(label="Select Your Themes",
                                )
 
 if selected_themes:
-    for selected_theme in selected_themes:
-        st.write(get_relevant_policies(selected_themes))
+    with st.spinner("Processing..."):
+        for selected_theme in selected_themes:
+            list_of_policies=get_relevant_policies(selected_themes)
 
+
+for list_of_policy in list_of_policies:
+    with st.expander(list_of_policy):
+        st.write(list_of_policy)
 
 
 
