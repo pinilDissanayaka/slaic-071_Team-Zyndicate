@@ -88,6 +88,6 @@ def get_align_candidate(policies):
     
     global generated_response
     
-    pie_plot=draw_pie_plot(generated_response.candidate, generated_response.score)
+    pie_plot=draw_pie_plot(["a", "b"], [0.5, 0.5])
 
     return generated_response.candidate, generated_response.score, generated_response.manifesto, pie_plot
