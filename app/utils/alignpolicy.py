@@ -18,15 +18,7 @@ class Topic(BaseModel):
 generated_response:Topic
 
 def retrieve_node(state:Graph_State):
-  question=f"""You are an expert in retrieving information from a vector store. 
-  I need you to find the most relevant document(s) related to the following topic or query. 
-  The vector store contains vectorized representations of various documents.
-    Query: {state['policies']}
-    Search the vector store, find the most relevant documents, and return the document(s) that 
-    best match the query. Provide a summary of each relevant document along with its title.
-    """
-
-  retrieved_documents=retriever.invoke(question)
+  retrieved_documents=retriever.invoke(state['policies'])
 
   return {"documents": retrieved_documents, "policies":state['policies']}
 
