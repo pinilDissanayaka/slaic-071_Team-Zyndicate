@@ -52,7 +52,7 @@ if list_of_policies:
 t=st.text_input("enter")
 
 if t:    
-    candidates, scores, manifesto=get_align_candidate(t)
+    candidates, scores=get_align_candidate(t)
     
     st.write("-----------------------------------------------------------------------------------------------------------")
     st.subheader("Which Presidential Candidate Aligns Most with Your Policy Choices?")
@@ -64,10 +64,7 @@ if t:
         st.write_stream(stream=stream_text(text=f"{score * 100} % with {candidate} policy."))
             
     st.write("-----------------------------------------------------------------------------------------------------------")
-    st.subheader("Here is a Breakdown of Your Manifesto")
-    st.write("-----------------------------------------------------------------------------------------------------------")
-    st.write(manifesto)
-    st.write("-----------------------------------------------------------------------------------------------------------")
+
 
 
 

@@ -16,7 +16,7 @@ class Graph_State(TypedDict):
 class Candidate(BaseModel):
     candidates: List[str]=Field(description="Which Presidential Candidates Aligns Most with Your Policy Choices")
     scores:List[float]=Field(description="Alignment Score")
-    policies:List[str]=Field(description="manifesto policies related to the user policy choices")
+
 generated_response:Candidate
 
 def retrieve_node(state:Graph_State):
@@ -80,7 +80,7 @@ def get_align_candidate(policies):
     global generated_response
 
 
-    return generated_response.candidates, generated_response.scores, generated_response.policies
+    return generated_response.candidates, generated_response.scores
 
 def draw_pie_plot(labels, sizes):
     fig, ax=plt.subplots()
