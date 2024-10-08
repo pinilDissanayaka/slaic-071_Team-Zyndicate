@@ -49,7 +49,6 @@ def generate_node(state:Graph_State):
     {"CONTEXT": RunnablePassthrough()}
     | get_relevant_policies_prompt
     | structured_llm
-    | StrOutputParser()
     )
 
     generation=get_relevant_policies_prompt_chain.invoke({"CONTEXT": state["documents"]})
