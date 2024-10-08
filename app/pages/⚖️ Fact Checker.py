@@ -7,6 +7,11 @@ from utils.voicehandler import save_voice_on_dir, voice_to_text
 
 temp_file_path="temp/"
 
+image_claim=None
+text_claim=None
+audio_claim=None
+claim=None
+
 # App title
 st.set_page_config(page_title="🤗💬 Election-Insight-App ")
 
@@ -32,10 +37,6 @@ selected_party = st.selectbox(
     "Select the party to fact check :",
     ("National People's Power | NPP", "Samagi Jana Balawegaya | SJB", "Sri Lanka Podujana Peramuna | SLPP", "NDC", "CPP", "PPP", "GUM", "GFP", "GCPP", "APC", "PNC", "LPG", "NDP", "Independent")
 )
-
-image_claim=None
-text_claim=None
-audio_claim=None
 
 text_claim = st.text_area("Enter the claim as text to fact check :")
 
