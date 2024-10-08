@@ -23,7 +23,7 @@ os.environ["GOOGLE_API_KEY"]==st.secrets['GOOGLE_API_KEY']
 os.environ["GOOGLE_PROJECT_ID"]==st.secrets['GOOGLE_PROJECT_ID']
 
 
-llm_model="llama-3.1-8b-instant"
+llm_model="llama-3.2-1b-preview"
 vision_model="llava-v1.5-7b-4096-preview"
 embedding_model="models/text-embedding-004"
 vector_store_index_name="manifesto"
