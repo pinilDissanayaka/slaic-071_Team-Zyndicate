@@ -1,6 +1,6 @@
 import os
 import streamlit as st
-from audiorecorder import audiorecorder
+from streamlit_mic_recorder import mic_recorder, speech_to_text
 from utils.factchecker import fact_checker
 from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, convert_img_to_text, stream_text
 
@@ -39,7 +39,17 @@ text_claim = st.text_area("Enter the claim as text to fact check :")
 
 st.write("or")
 
-voice_claim_data = audiorecorder("Click to record", "Click to stop recording")
+text = speech_to_text(
+    language='en',
+    start_prompt="Start recording",
+    stop_prompt="Stop recording",
+    just_once=False,
+    use_container_width=False,
+    callback=None,
+    args=(),
+    kwargs={},
+    key=None
+)
 
 if len(voice_claim_data) > 0:
     # To play audio in frontend:
