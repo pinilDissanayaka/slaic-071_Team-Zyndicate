@@ -77,4 +77,4 @@ def get_align_candidate(policies):
     
     global generated_response
 
-    return generated_response.policies
+    return generated_response
