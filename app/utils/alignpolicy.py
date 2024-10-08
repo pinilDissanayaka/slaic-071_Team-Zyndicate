@@ -75,7 +75,7 @@ graph=workflow.compile()
 
 def draw_pie_plot(labels, sizes):
     fig, ax=plt.subplots()
-    ax.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
+    ax.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=True)
     ax.axis('equal')
     
     return fig
