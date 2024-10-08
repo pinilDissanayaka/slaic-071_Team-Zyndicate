@@ -52,7 +52,7 @@ if list_of_policies:
 t=st.text_input("enter")
 
 if t:    
-    candidates, scores, manifestos=get_align_candidate(t)
+    candidates, scores, manifesto=get_align_candidate(t)
     
     st.write("-----------------------------------------------------------------------------------------------------------")
     st.subheader("Which Presidential Candidate Aligns Most with Your Policy Choices?")
@@ -65,10 +65,9 @@ if t:
             
     st.write("-----------------------------------------------------------------------------------------------------------")
     st.subheader("Here is a Breakdown of Your Manifesto")
-    for manifesto in manifestos:
-        st.write("-----------------------------------------------------------------------------------------------------------")
-        st.write(manifesto)
-        st.write("-----------------------------------------------------------------------------------------------------------")
+    st.write("-----------------------------------------------------------------------------------------------------------")
+    st.write(manifesto)
+    st.write("-----------------------------------------------------------------------------------------------------------")
 
 
 
