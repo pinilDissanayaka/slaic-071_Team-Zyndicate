@@ -16,8 +16,7 @@ class Graph_State(TypedDict):
 class Candidate(BaseModel):
     candidates: List[str]=Field(description="Which Presidential Candidates Aligns Most with Your Policy Choices")
     scores:List[float]=Field(description="Alignment Score")
-    manifestos:List[str]=Field(description="description about how the user policies align with the candidates policies")
-
+    manifestos:List[str]=Field(description="A list of candidate manifestos, containing the full text of each candidate's political agenda. This field allows you to input the actual manifesto text, which will be analyzed to determine how the candidate's policies align with the user's preferences and selected topics. Each manifesto should provide clear statements of the candidate's promises, goals, and proposed policies.")
 generated_response:Candidate
 
 def retrieve_node(state:Graph_State):
