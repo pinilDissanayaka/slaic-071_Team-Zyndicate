@@ -2,6 +2,7 @@ from utils.utils import embeddings, retriever, llm
 from langchain.prompts import ChatPromptTemplate
 from langgraph.graph import END, StateGraph, START
 from langchain_core.runnables import RunnablePassthrough
+import matplotlib.pyplot as plt
 from langchain_core.output_parsers import StrOutputParser
 from typing import TypedDict, List
 from pydantic import BaseModel, Field
@@ -72,6 +73,13 @@ workflow.add_edge("generate_node", END)
 
 graph=workflow.compile()
 
+def draw_pie_plot(labels, sizes):
+    fig, ax=plt.subplots()
+    ax.pie(sizes, labels=labels, autopct='%1.1f%%', shadow=True, startangle=90)
+    ax.axis('equal')
+    
+    return fig
+    
 
 
 def get_align_candidate(policies):
@@ -79,5 +87,7 @@ def get_align_candidate(policies):
       pass
     
     global generated_response
+    
+    pie_plot=draw_pie_plot(generated_response.candidate, generated_response.score)
 
-    return generated_response.candidate, generated_response.score, generated_response.manifesto
+    return generated_response.candidate, generated_response.score, generated_response.manifesto, pie_plot
