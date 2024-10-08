@@ -53,7 +53,6 @@ if selected_themes:
         for theme in themes_col1:
             st.subheader(theme)
             themes[theme]=st.multiselect(label="Select Your Topics", options=get_topics(theme))
-            st.write(get_relevant_policies(topic=theme))
     with col2:
         for theme in themes_col2:
             st.subheader(theme)
