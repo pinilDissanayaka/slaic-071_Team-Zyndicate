@@ -59,7 +59,7 @@ if t:
     pie_plot=draw_pie_plot(labels=candidates, sizes= scores)
     st.pyplot(pie_plot)
     st.write("-----------------------------------------------------------------------------------------------------------")
-    st.subheader("Your Manifesto Aligns...")
+    st.subheader("Your Policies Aligns...")
     for candidate, score in zip(candidates, scores):
         st.write_stream(stream=stream_text(text=f"{score * 100} % with {candidate} policy."))
             
