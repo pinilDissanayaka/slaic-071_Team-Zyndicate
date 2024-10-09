@@ -5,7 +5,7 @@ from utils.manifestomatchmaker import get_relevant_policies
 from utils.alignpolicy import get_align_candidate, draw_pie_plot
 from utils.policies import get_policies
 
-selected_policies=[]
+list_of_selected_policies=[]
 
 # App title
 st.set_page_config(page_title="🤗💬 Election-Insight-App ")
@@ -39,7 +39,16 @@ if selected_themes:
     with st.spinner("Processing..."):
         for selected_theme in selected_themes:
             policies=get_policies(theme=selected_theme)
-            selected_policies=st.multiselect(label="Select Policies", 
+            selected_policies=st.multiselect(label=f"Select Policies related to the {selected_theme}", 
                             options=policies
             )
+            list_of_selected_policies.append(selected_policies)
+    
+
+if len(list_of_selected_policies) !=0:
+    if st.button("Match"):
+        with st.spinner("Matching..."):
+            t=get_align_candidate(policies=list_of_selected_policies)
+            st.write(t)
+    
 
