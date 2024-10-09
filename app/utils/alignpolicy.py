@@ -20,8 +20,11 @@ class Candidate(BaseModel):
 generated_response:Candidate
 
 def retrieve_node(state:Graph_State):
-  retrieved_documents=retriever.invoke(state['policies'])
-
+  policies=state['policies']
+  retrieved_documents=[]
+  for policy in policies:
+    retrieved_documents.append(retriever.invoke(policy))
+    
   return {"documents": retrieved_documents, "policies":state['policies']}
 
 

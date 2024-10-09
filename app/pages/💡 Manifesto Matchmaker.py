@@ -1,7 +1,6 @@
 import os
 import streamlit as st
 from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, stream_text
-from utils.manifestomatchmaker import get_relevant_policies
 from utils.alignpolicy import get_align_candidate, draw_pie_plot
 from utils.policies import get_policies
 
@@ -49,8 +48,7 @@ if selected_themes:
 if len(list_of_selected_policies) !=0:
     if st.button("Match"):
         with st.spinner("Matching..."):
-            for selected_policy in selected_policies:
-                aligned_candidate=get_align_candidate(policies=selected_policy)
-                st.write(aligned_candidate)
+            aligned_candidate=get_align_candidate(policies=selected_policies)
+            st.write(aligned_candidate)
     
 
