@@ -27,6 +27,7 @@ with st.sidebar:
 
 st.title("💡 Manifesto Matchmaker")
 st.write("-----------------------------------------------------------------------------------------------------------") 
+st.write("See which presidential candidate's monitorable promises aligns best with your vision for Sri Lanka")
 
 selected_themes=st.multiselect(label="Select Your Themes", 
                                options=["Infrastructure", "Social Protection", "Trade and Export", "Labour", "Governance", "Law and Order", "Corruption", "Agriculture", "Health", "Taxation", "Education", "Supplementary", "Economic Growth", "IMF Programme", "Reconciliation"], 
