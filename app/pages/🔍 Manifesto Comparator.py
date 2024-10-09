@@ -47,6 +47,7 @@ if candidates and selected_category:
                 st.write_stream(stream_text(evaluation_response))            
         except Exception as e:
             st.warning("Internal Server Error.", icon="⚠️")
+            st.warning(e.args, icon="⚠️")
 
 
 
