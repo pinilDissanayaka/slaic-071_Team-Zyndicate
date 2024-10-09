@@ -7,9 +7,9 @@ from utils.utils import retriever, llm
 
 
 class State(TypedDict):
-  question: str
-  documents: List[str]
-  generation: str
+    question: str
+    documents: List[str]
+    generation: str
 
 
 response:str

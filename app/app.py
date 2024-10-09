@@ -25,11 +25,15 @@ st.subheader("🤖 AI Chatbot for Manifesto & Election Queries:")
 
 st.write("Got questions about a candidate’s policies? Just ask! Our intelligent chatbot answers your queries with accurate, verified information from candidates' manifestos and election data. 💬✅")
 
+st.subheader("💡 Manifesto Matchmaker:")
+
+st.write("Discover which candidate’s policies align most with your values! The Manifesto Matchmaker analyzes candidate manifestos and helps you find the perfect match based on the topics you care about the most. Whether it’s healthcare, education, the economy, or the environment, this tool compares key policies to show how closely they align with your personal preferences and beliefs. Empower your vote by choosing a candidate who shares your vision for the future!")
+
 st.write("---------------------------------------------------------------------------------------------------------------------------------------------------")
 
 st.header("⚙️ Technologies Powering Election Insight:")
 
-st.subheader("💡 LLM - LLaMA 3.1:")
+st.subheader("💡 LLM - LLaMA 3.1 70B:")
 
 st.write("Our app harnesses the power of LLaMA 3.1, a cutting-edge Large Language Model that drives all natural language interactions, offering quick, reliable responses and analysis.")
 
