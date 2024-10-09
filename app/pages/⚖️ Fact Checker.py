@@ -51,6 +51,8 @@ if uploaded_image_file:
         st.write(image_claim)
     except Exception as e:
         st.warning("Internal Server Error.", icon="⚠️")
+        st.warning(e.args, icon="🚨")
+        
     
 
 if image_claim != "" or text_claim != "":
@@ -67,3 +69,5 @@ if claim and selected_party:
                 st.write_stream(stream_text(evaluation_response))
     except Exception as e:
         st.warning("Internal Server Error.", icon="⚠️")
+        st.warning(e.args, icon="🚨")
+        

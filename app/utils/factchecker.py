@@ -72,7 +72,7 @@ def fact_verdict_node(fact:FactChecker):
     verdict_chain = (
         {"SCORE":RunnablePassthrough(), "PARTY": RunnablePassthrough()}
         | verdict_prompt
-        | llm
+        | get_llm()
         | StrOutputParser()
         )
     
@@ -83,7 +83,7 @@ def fact_verdict_node(fact:FactChecker):
     return {'verdict' : verdict_response}
 
 def web_search_tool(face:FactChecker):
-    structured_llm_router = llm.with_structured_output(RouteQuery)
+    structured_llm_router = get_llm().with_structured_output(RouteQuery)
 
 
 

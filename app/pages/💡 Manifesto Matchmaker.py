@@ -65,5 +65,6 @@ if len(list_of_selected_policies) !=0:
                 st.plotly_chart(figure_or_data=draw_pie_plot(labels=aligned_candidates, sizes=aligned_candidate_scores))
     except Exception as e:
         st.warning("Internal Server Error.", icon="⚠️")
-        st.warning(e.args, icon="⚠️")
+        st.warning(e.args, icon="🚨")
+
 
