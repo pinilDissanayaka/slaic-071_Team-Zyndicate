@@ -53,13 +53,10 @@ if prompt := st.chat_input():
 
 # Generate a new response if last message is not from assistant
 if st.session_state.messages[-1]["role"] != "assistant":
-    try:
-        with st.chat_message("assistant"):
-            with st.spinner("Thinking..."):
-                response = generate_response(prompt) 
-                st.write_stream(stream_text(response))
-        message = {"role": "assistant", "content": response}
-        st.session_state.messages.append(message)
-    except Exception as e:
-        st.warning("Internal Server Error.", icon="⚠️")
+    with st.chat_message("assistant"):
+        with st.spinner("Thinking..."):
+            response = generate_response(prompt) 
+            st.write_stream(stream_text(response))
+    message = {"role": "assistant", "content": response}
+    st.session_state.messages.append(message)
 
