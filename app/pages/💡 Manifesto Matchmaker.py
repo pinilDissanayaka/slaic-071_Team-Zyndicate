@@ -42,7 +42,7 @@ if selected_themes:
             selected_policies=st.multiselect(label=f"Select Policies related to the {selected_theme}", 
                             options=policies
             )
-            list_of_selected_policies.append(selected_policies)
+            list_of_selected_policies.append(selected_policies[0])
     
 
 if len(list_of_selected_policies) !=0:
