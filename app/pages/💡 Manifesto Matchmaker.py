@@ -49,8 +49,8 @@ if selected_themes:
 if len(list_of_selected_policies) !=0:
     if st.button("Match"):
         with st.spinner("Matching..."):
-            st.write(list_of_selected_policies)
-            t=get_align_candidate(policies=list_of_selected_policies)
-            st.write(t)
+            for selected_policy in selected_policies:
+                aligned_candidate=get_align_candidate(policies=selected_policy)
+                st.write(aligned_candidate)
     
 
