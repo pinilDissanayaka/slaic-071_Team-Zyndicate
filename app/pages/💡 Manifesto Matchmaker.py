@@ -40,19 +40,23 @@ if selected_themes:
                             options=list_of_policies[0]
         )
 
-if len(selected_policies) > 0:    
-    candidates, scores=get_align_candidate(policies=selected_policies)
-    
-    st.write("-----------------------------------------------------------------------------------------------------------")
-    st.subheader("Which Presidential Candidate Aligns Most with Your Policy Choices?")
-    pie_plot=draw_pie_plot(labels=candidates, sizes= scores)
-    st.pyplot(pie_plot)
-    st.write("-----------------------------------------------------------------------------------------------------------")
-    st.subheader("Your Policies Aligns...")
-    for candidate, score in zip(candidates, scores):
-        st.write_stream(stream=stream_text(text=f"{score * 100} % with {candidate} policy."))
+if len(selected_policies) > 0:
+    with st.spinner("Processing..."):
+        for selected_policy in selected_policies:
+            candidates, scores=get_align_candidate(policies=selected_policy)
             
-    st.write("-----------------------------------------------------------------------------------------------------------")
+            st.write("-----------------------------------------------------------------------------------------------------------")
+            st.write(selected_policy)
+            st.write("-----------------------------------------------------------------------------------------------------------")
+            st.subheader("Which Presidential Candidate Aligns Most with Your Policy Choices?")
+            pie_plot=draw_pie_plot(labels=candidates, sizes= scores)
+            st.pyplot(pie_plot)
+            st.write("-----------------------------------------------------------------------------------------------------------")
+            st.subheader("Your Policies Aligns...")
+            for candidate, score in zip(candidates, scores):
+                st.write_stream(stream=stream_text(text=f"{score * 100} % with {candidate} policy."))
+                    
+            st.write("-----------------------------------------------------------------------------------------------------------")
 
 
 
