@@ -46,14 +46,18 @@ if selected_themes:
     
 
 if len(list_of_selected_policies) !=0:
-    if st.button("Match"):
-        with st.spinner("Matching..."):
-            aligned_candidate, aligned_candidate_score=get_align_candidate(policies=selected_policies)
-            
-            st.write(stream_text(text="Your Manifesto Aligns..."))
-            
-            st.write(stream_text(text=aligned_candidate))
-            
-            st.plotly_chart(figure_or_data=draw_pie_plot(labels=aligned_candidate, sizes=aligned_candidate_score))
+    try:
+        if st.button("Match"):
+            with st.spinner("Matching..."):
+                aligned_candidate, aligned_candidate_score=get_align_candidate(policies=selected_policies)
+                
+                st.write(stream_text(text="Your Manifesto Aligns..."))
+                
+                st.write(aligned_candidate)
+                
+                st.plotly_chart(figure_or_data=draw_pie_plot(labels=aligned_candidate, sizes=aligned_candidate_score))
+    except Exception as e:
+        st.error("Internal Server Error.")
+        st.error(e.args)
     
 
