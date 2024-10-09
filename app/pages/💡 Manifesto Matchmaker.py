@@ -42,7 +42,7 @@ if selected_themes:
 
 if len(selected_policies) > 0:
     if st.button("Match"):
-        with st.spinner("Processing..."):
+        with st.spinner("Matching..."):
             for selected_policy in selected_policies:
                 candidates, scores=get_align_candidate(policies=selected_policy)
                 
@@ -51,7 +51,7 @@ if len(selected_policies) > 0:
                 st.write("-----------------------------------------------------------------------------------------------------------")
                 st.subheader("Which Presidential Candidate Aligns Most with Your Policy Choices?")
                 pie_plot=draw_pie_plot(labels=candidates, sizes= scores)
-                st.pyplot(pie_plot)
+                st.plotly_chart(pie_plot)
                 st.write("-----------------------------------------------------------------------------------------------------------")
                 st.subheader("Your Policies Aligns...")
                 for candidate, score in zip(candidates, scores):

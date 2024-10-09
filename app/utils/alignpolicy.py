@@ -2,7 +2,7 @@ from utils.utils import embeddings, retriever, llm
 from langchain.prompts import ChatPromptTemplate
 from langgraph.graph import END, StateGraph, START
 from langchain_core.runnables import RunnablePassthrough
-import matplotlib.pyplot as plt
+import plotly.express as px
 from langchain_core.output_parsers import StrOutputParser
 from typing import TypedDict, List
 from pydantic import BaseModel, Field
@@ -83,8 +83,6 @@ def get_align_candidate(policies):
     return generated_response.candidates, generated_response.scores
 
 def draw_pie_plot(labels, sizes):
-    fig, ax=plt.subplots()
-    ax.pie(sizes, labels=labels, autopct='%1.12f%%')
-    ax.axis('equal')
-    
-    return fig
+    pie_chart=px.pie(values=sizes, names=labels)
+  
+    return pie_chart
