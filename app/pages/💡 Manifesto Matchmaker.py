@@ -51,7 +51,7 @@ if len(list_of_selected_policies) !=0:
             with st.spinner("Matching..."):
                 aligned_candidates, aligned_candidate_scores=get_align_candidate(policies=selected_policies)
                 
-                st.write(stream_text(text="Your Manifesto Aligns..."))
+                st.subheader(stream_text(text="Your Manifesto Aligns..."))
                 
                 for aligned_candidate, aligned_candidate_score in zip(aligned_candidates, aligned_candidate_scores):
                     st.write(stream_text(text=f"candidate {aligned_candidate}", delay=0.06))
