@@ -42,6 +42,7 @@ if selected_themes:
             selected_policies=st.multiselect(label=f"Select Policies related to the {selected_theme}", 
                             options=policies
             )
+            st.write(selected_policies)
             list_of_selected_policies.append(selected_policies[0])
     
 
