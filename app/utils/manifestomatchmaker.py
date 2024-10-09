@@ -76,12 +76,16 @@ graph=workflow.compile()
 
 
 
-def get_relevant_policies(topic:str):
-    for event in graph.stream({"topic": topic}):
-      pass
-    
+def get_relevant_policies(themes:List[str]):
+  list_of_policies=[]
+  for theme in themes:
+    for event in graph.stream({"topic": theme}):
+            pass
+          
     global generated_response
-
-    return generated_response.policies
+    
+    list_of_policies.append(generated_response.policies)
+  
+  return list_of_policies
 
 

@@ -4,8 +4,6 @@ from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, stream
 from utils.manifestomatchmaker import get_relevant_policies
 from utils.alignpolicy import get_align_candidate, draw_pie_plot
 
-selected_policies=[]
-list_of_policies=[]
 
 # App title
 st.set_page_config(page_title="🤗💬 Election-Insight-App ")
@@ -36,23 +34,14 @@ selected_themes=st.multiselect(label="Select Your Themes",
 
 if selected_themes:
     with st.spinner("Processing..."):
-        list_of_policies=[]
-        for selected_theme in selected_themes:
-            list_of_policies.append(get_relevant_policies(selected_theme))
-
-
-if list_of_policies:
-    for list_of_policy in list_of_policies:
-        selected_policies.append(st.multiselect(label="Select Policies", 
+        list_of_policies=get_relevant_policies(topics=selected_themes)
+        for list_of_policy in list_of_policies:
+            selected_policies=st.multiselect(label="Select Policies", 
                                 options=list_of_policy
-                                )
-        )
-        
+            )
 
-t=st.text_input("enter")
-
-if t:    
-    candidates, scores=get_align_candidate(t)
+if selected_policies:    
+    candidates, scores=get_align_candidate(policies=selected_policies)
     
     st.write("-----------------------------------------------------------------------------------------------------------")
     st.subheader("Which Presidential Candidate Aligns Most with Your Policy Choices?")
