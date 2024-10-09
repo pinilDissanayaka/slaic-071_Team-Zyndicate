@@ -15,7 +15,7 @@ class Graph_State(TypedDict):
   
 class Candidate(BaseModel):
     candidates: List[str]=Field(description="Which Presidential Candidates Aligns Most with Your Policy Choices")
-    scores:List[float]=Field(description="Alignment Score")
+    scores:List[float]=Field(description="Alignment percentage")
 
 generated_response:Candidate
 
@@ -37,7 +37,7 @@ def generate_node(state:Graph_State):
 
     Context: {CONTEXT}
 
-    Based on this information, return the candidate with the highest alignment percentage, 
+    Based on this information, return the candidate with the highest alignment percentage out of 100%, 
     along with an explanation of how each candidate's policies match the user's preferences.
     If the answer is not found in the context, kindly state "I don't know." 
     Don't try to make up an answer.
