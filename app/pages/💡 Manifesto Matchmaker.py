@@ -51,10 +51,10 @@ if len(list_of_selected_policies) !=0:
             with st.spinner("Matching..."):
                 aligned_candidates, aligned_candidate_scores=get_align_candidate(policies=selected_policies)
                 
-                st.subheader(stream_text(text="Your Manifesto Aligns..."))
+                st.subheader("Your Manifesto Aligns...")
                 
                 for aligned_candidate, aligned_candidate_score in zip(aligned_candidates, aligned_candidate_scores):
-                    st.write(stream_text(text=f"candidate {aligned_candidate}", delay=0.06))
+                    st.write_stream(stream_text(text=f"candidate {aligned_candidate}", delay=0.06))
                 
                 st.plotly_chart(figure_or_data=draw_pie_plot(labels=aligned_candidates, sizes=aligned_candidate_scores))
     except Exception as e:
