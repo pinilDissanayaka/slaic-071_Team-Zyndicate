@@ -43,20 +43,26 @@ st.write("or")
 uploaded_image_file = st.file_uploader("Choose a PDF, TXT, JPEG or PNG files", accept_multiple_files=False)
 
 if uploaded_image_file:
-    with st.spinner("Extracting..."):
-        image_claim=convert_img_to_text(uploaded_image_file=uploaded_image_file)
-    st.write("Text extracted from uploaded file.")
-    st.write(image_claim)
+    try:
+        with st.spinner("Extracting..."):
+            image_claim=convert_img_to_text(uploaded_image_file=uploaded_image_file)
+        st.write("Text extracted from uploaded file.")
+        st.write(image_claim)
+    except Exception as e:
+        st.warning("Internal Server Error.", icon="⚠️")
     
 
 if image_claim != "" or text_claim != "":
     claim=image_claim+" "+text_claim
 
 if claim and selected_party:
-    if st.button("Fact Check"):
-        with st.spinner("Thinking..."):
-            generated_response, evaluation_response=fact_checker(claim=claim, party=selected_party)
-            st.write("---------------------------------------------------------------------------------------------------------------")
-            st.write_stream(stream_text(generated_response))
-            st.write("---------------------------------------------------------------------------------------------------------------")
-            st.write_stream(stream_text(evaluation_response))
+    try:
+        if st.button("Fact Check"):
+            with st.spinner("Thinking..."):
+                generated_response, evaluation_response=fact_checker(claim=claim, party=selected_party)
+                st.write("---------------------------------------------------------------------------------------------------------------")
+                st.write_stream(stream_text(generated_response))
+                st.write("---------------------------------------------------------------------------------------------------------------")
+                st.write_stream(stream_text(evaluation_response))
+    except Exception as e:
+        st.warning("Internal Server Error.", icon="⚠️")

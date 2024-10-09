@@ -80,7 +80,7 @@ def load_into_vector_store(directory=temp_dir):
                 store(split(load_txt(relative_path)))
 
     except Exception as e:
-        st.exception(e)
+        st.exception("Internal Server Error.", icon="⚠️")
             
             
             
@@ -93,7 +93,7 @@ def save_pdf_txt_on_temp_dir(uploaded_file, temp_file_path=temp_dir):
         with open(file_path, 'wb') as file_to_write:
             file_to_write.write(uploaded_file.read())
     except Exception as e:
-        st.exception(e)
+        st.exception("Internal Server Error.", icon="⚠️")
         
 def save_img_on_dir(uploaded_image_file, temp_file_path=temp_dir):
     try:
@@ -104,7 +104,7 @@ def save_img_on_dir(uploaded_image_file, temp_file_path=temp_dir):
             file_to_write.write(uploaded_image_file.read())
         return file_path
     except Exception as e:
-        st.exception(e)
+        st.exception("Internal Server Error.", icon="⚠️")
     
             
             
@@ -141,7 +141,7 @@ def convert_img_to_text(uploaded_image_file):
         
         return chat_completion.choices[0].message.content
     except Exception as e:
-        st.exception(e)
+        st.exception("Internal Server Error.", icon="⚠️")
         
 
 def stream_text(text:str, delay=0.05):
