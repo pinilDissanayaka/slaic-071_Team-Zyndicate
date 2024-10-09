@@ -3,7 +3,7 @@ import streamlit as st
 from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, stream_text
 from utils.manifestomatchmaker import get_relevant_policies
 from utils.alignpolicy import get_align_candidate, draw_pie_plot
-from app.utils.policies import get_policies
+from utils.policies import get_policies
 
 selected_policies=[]
 
