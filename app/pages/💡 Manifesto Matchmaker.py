@@ -37,7 +37,7 @@ if selected_themes:
     with st.spinner("Processing..."):
         list_of_policies=get_relevant_policies(themes=selected_themes)
         selected_policies=st.multiselect(label="Select Policies", 
-                            options=list_of_policies
+                            options=list_of_policies[0]
         )
 
 if len(selected_policies) > 0:    
