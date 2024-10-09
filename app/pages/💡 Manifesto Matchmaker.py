@@ -4,6 +4,7 @@ from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, stream
 from utils.manifestomatchmaker import get_relevant_policies
 from utils.alignpolicy import get_align_candidate, draw_pie_plot
 
+selected_policies=[]
 
 # App title
 st.set_page_config(page_title="🤗💬 Election-Insight-App ")
@@ -35,12 +36,11 @@ selected_themes=st.multiselect(label="Select Your Themes",
 if selected_themes:
     with st.spinner("Processing..."):
         list_of_policies=get_relevant_policies(topics=selected_themes)
-        for list_of_policy in list_of_policies:
-            selected_policies=st.multiselect(label="Select Policies", 
-                                options=list_of_policy
-            )
+        selected_policies=st.multiselect(label="Select Policies", 
+                            options=list_of_policies
+        )
 
-if selected_policies:    
+if len(selected_policies) > 0:    
     candidates, scores=get_align_candidate(policies=selected_policies)
     
     st.write("-----------------------------------------------------------------------------------------------------------")
