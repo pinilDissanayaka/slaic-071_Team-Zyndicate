@@ -27,7 +27,7 @@ llm_model="llama3-groq-70b-8192-tool-use-preview"
 vision_model="llava-v1.5-7b-4096-preview"
 embedding_model="models/text-embedding-004"
 vector_store_index_name="manifesto"
-search_k=10
+search_k=5
 temp_dir="temp"
 
 
