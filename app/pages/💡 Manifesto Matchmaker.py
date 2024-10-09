@@ -36,8 +36,8 @@ selected_themes=st.multiselect(label="Select Your Themes",
 
 if selected_themes:
     with st.spinner("Processing..."):
-        st.markdown(selected_themes)
         list_of_policies=get_relevant_policies(themes=selected_themes)
+        st.markdown(list_of_policies)
         selected_policies=st.multiselect(label="Select Policies", 
                             options=list_of_policies[0]
         )
