@@ -23,23 +23,29 @@ os.environ["GOOGLE_API_KEY"]==st.secrets['GOOGLE_API_KEY']
 os.environ["GOOGLE_PROJECT_ID"]==st.secrets['GOOGLE_PROJECT_ID']
 
 
-llm_model="llama-3.1-70b-versatile"
+llm_model="llama3-groq-70b-8192-tool-use-preview"
 vision_model="llava-v1.5-7b-4096-preview"
 embedding_model="models/text-embedding-004"
 vector_store_index_name="manifesto"
-search_k=10
+search_k=4
+temperature=0.9
 temp_dir="temp"
 
 
-embeddings=GoogleGenerativeAIEmbeddings(model=embedding_model)
+def get_embeddings(embedding_model=embedding_model):
+    embeddings=GoogleGenerativeAIEmbeddings(model=embedding_model)
+    return embeddings
 
-retriever=PineconeVectorStore(embedding=embeddings, index_name=vector_store_index_name).as_retriever(search_kwargs={"k": search_k})
+def get_retriever(search_k=search_k):
+    retriever=PineconeVectorStore(embedding=get_embeddings(), index_name=vector_store_index_name).as_retriever(search_kwargs={"k": search_k})
+    return retriever
 
-
-llm=ChatGroq(model=llm_model,
-            temperature=0.5,
-            max_tokens=None,
-            timeout=None)
+def get_llm(llm_model=llm_model, temperature=temperature):
+    llm=ChatGroq(model=llm_model,
+                temperature=temperature,
+                max_tokens=None,
+                timeout=None)
+    return llm
 
 
 def load_pdf(path):
@@ -61,7 +67,7 @@ def split(docs):
     return doc_splits
 
 def store(doc_splits, index_name=vector_store_index_name):
-    pinecone_vectore_store=PineconeVectorStore.from_documents(documents=doc_splits, embedding=embeddings, index_name=index_name)
+    pinecone_vectore_store=PineconeVectorStore.from_documents(documents=doc_splits, embedding=get_embeddings(), index_name=index_name)
     return pinecone_vectore_store
 
 
@@ -78,10 +84,9 @@ def load_into_vector_store(directory=temp_dir):
                 store(split(load_pdf(relative_path)))
             elif os.path.splitext(dir)[1] == 'txt':
                 store(split(load_txt(relative_path)))
-        if os.path.exists(directory):
-            os.remove(directory)
+
     except Exception as e:
-        st.exception(e)
+        st.exception("Internal Server Error.", icon="⚠️")
             
             
             
@@ -94,7 +99,7 @@ def save_pdf_txt_on_temp_dir(uploaded_file, temp_file_path=temp_dir):
         with open(file_path, 'wb') as file_to_write:
             file_to_write.write(uploaded_file.read())
     except Exception as e:
-        st.exception(e)
+        st.exception("Internal Server Error.", icon="⚠️")
         
 def save_img_on_dir(uploaded_image_file, temp_file_path=temp_dir):
     try:
@@ -105,7 +110,7 @@ def save_img_on_dir(uploaded_image_file, temp_file_path=temp_dir):
             file_to_write.write(uploaded_image_file.read())
         return file_path
     except Exception as e:
-        st.exception(e)
+        st.exception("Internal Server Error.", icon="⚠️")
     
             
             
@@ -140,15 +145,12 @@ def convert_img_to_text(uploaded_image_file):
             model=vision_model,
         )   
         
-        if os.path.exists(image_path):
-            os.remove(image_path)
-
         return chat_completion.choices[0].message.content
     except Exception as e:
-        st.exception(e)
+        st.exception("Internal Server Error.", icon="⚠️")
         
 
-def stream_text(text:str, delay=0.01):
+def stream_text(text:str, delay=0.05):
     for word in text.split(" "):
         yield word + " "
         sleep(delay)

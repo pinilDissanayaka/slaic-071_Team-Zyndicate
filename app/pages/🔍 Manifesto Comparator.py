@@ -23,9 +23,10 @@ with st.sidebar:
     
     if uploaded_files:
         with st.spinner("Processing..."):
-            st.button("Upload to vector store.", on_click=load_into_vector_store)
+            st.button("Upload to vector store.", on_click=load_into_vector_store())
             
 st.title("🔍 Manifesto Comparator")
+st.write("Quickly compare candidate manifestos side-by-side on key issues like the economy 💰, healthcare 🏥, and education 📚. Discover the promises, goals, and policies that matter most to you, all in one place.")
 st.write("-----------------------------------------------------------------------------------------------------------")
 
 selected_category = st.selectbox(
@@ -36,13 +37,17 @@ selected_category = st.selectbox(
 candidates = st.text_input("Enter candidate names or party to compare :")
 
 if candidates and selected_category:
-    if st.button("compare"):
-        with st.spinner("Thinking..."):
-            generated_response, evaluation_response=manifesto_comparator(domain=selected_category, candidates=candidates)
-            
-            st.write_stream(stream_text(generated_response))
-            st.write("---------------------------------------------------------------------------------------------------------------")
-            st.write_stream(stream_text(evaluation_response))            
+    if st.button("Compare"):
+        try:
+            with st.spinner("Thinking..."):
+                generated_response, evaluation_response=manifesto_comparator(domain=selected_category, candidates=candidates)
+                
+                st.write_stream(stream_text(generated_response))
+                st.write("---------------------------------------------------------------------------------------------------------------")
+                st.write_stream(stream_text(evaluation_response))            
+        except Exception as e:
+            st.warning("Internal Server Error.", icon="⚠️")
+            st.warning(e.args, icon="🚨")
 
 
 

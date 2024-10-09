@@ -23,12 +23,13 @@ with st.sidebar:
             
     if uploaded_files:
         with st.spinner("Processing..."):
-            st.button("Upload to vector store.", on_click=load_into_vector_store)
+            st.button("Upload to vector store.", on_click=load_into_vector_store())
             
     st.button("Clear Chat History !", on_click=clear_state)
 
 
 st.title("🤖 AI Chatbot for Manifesto & Election Queries")
+st.write("Got questions about a candidate’s policies? Just ask! Our intelligent chatbot answers your queries with accurate, verified information from candidates' manifestos and election data. 💬✅")
 st.write("-----------------------------------------------------------------------------------------------------------")
 
 # Store LLM generated responses
@@ -53,10 +54,14 @@ if prompt := st.chat_input():
 
 # Generate a new response if last message is not from assistant
 if st.session_state.messages[-1]["role"] != "assistant":
-    with st.chat_message("assistant"):
-        with st.spinner("Thinking..."):
-            response = generate_response(prompt) 
-            st.write_stream(stream_text(response))
-    message = {"role": "assistant", "content": response}
-    st.session_state.messages.append(message)
+    try:
+        with st.chat_message("assistant"):
+            with st.spinner("Thinking..."):
+                response = generate_response(prompt) 
+                st.write_stream(stream_text(response))
+        message = {"role": "assistant", "content": response}
+        st.session_state.messages.append(message)
+    except Exception as e:
+        st.warning("Internal Server Error.", icon="⚠️")
+        st.warning(e.args, icon="🚨")
 
