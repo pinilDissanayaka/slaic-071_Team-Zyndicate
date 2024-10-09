@@ -3,6 +3,7 @@ import streamlit as st
 from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, stream_text
 from utils.manifestomatchmaker import get_relevant_policies
 from utils.alignpolicy import get_align_candidate, draw_pie_plot
+from app.utils.policies import get_policies
 
 selected_policies=[]
 
@@ -36,32 +37,9 @@ selected_themes=st.multiselect(label="Select Your Themes",
 
 if selected_themes:
     with st.spinner("Processing..."):
-        list_of_policies=get_relevant_policies(themes=selected_themes)
-        st.markdown(list_of_policies)
-        selected_policies=st.multiselect(label="Select Policies", 
-                            options=list_of_policies[0]
-        )
-
-if len(selected_policies) > 0:
-    if st.button("Match"):
-        with st.spinner("Matching..."):
-            for selected_policy in selected_policies:
-                candidates, scores=get_align_candidate(policies=selected_policy)
-                
-                st.write("-----------------------------------------------------------------------------------------------------------")
-                st.write(selected_policy)
-                st.write("-----------------------------------------------------------------------------------------------------------")
-                st.subheader("Which Presidential Candidate Aligns Most with Your Policy Choices?")
-                pie_plot=draw_pie_plot(labels=candidates, sizes= scores)
-                st.plotly_chart(pie_plot)
-                st.write("-----------------------------------------------------------------------------------------------------------")
-                st.subheader("Your Policies Aligns...")
-                for candidate, score in zip(candidates, scores):
-                    st.write_stream(stream=stream_text(text=f"{score * 100} % with {candidate} policy."))
-                        
-                st.write("-----------------------------------------------------------------------------------------------------------")
-
-
-
-
+        for selected_theme in selected_themes:
+            policies=get_policies(theme=selected_theme)
+            selected_policies=st.multiselect(label="Select Policies", 
+                            options=policies
+            )
 
