@@ -16,7 +16,7 @@ response:str
 
         
 def retrieve_node(state:State):    
-    question=f'''Compare the manifestos focusing on the key issues of given {state['question']} '''
+    question=f"""{state['question']} """
     
     retrieve_documents=retriever.invoke(question)
     
