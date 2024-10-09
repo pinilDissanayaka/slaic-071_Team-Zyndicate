@@ -21,9 +21,7 @@ class RouteQuery(BaseModel):
         description="Given a user question choose to route it to web search or a vectorstore.",)
 
 def fact_retrieve_node(fact:FactChecker):
-    question=f'''Retrieve relevant documents from the vector database based on the following inputs: {fact['claim']} and a 
-    selected party {fact['party']}. Ensure the documents focus on the selected party, providing insights 
-    into the policies or statements made by the specified candidates or parties'''
+    question=f'''{fact['claim']}, {fact['party']}.'''
     
     retrieve_documents=retriever.invoke(question)
     

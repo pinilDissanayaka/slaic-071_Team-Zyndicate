@@ -18,9 +18,7 @@ class Graph_State(TypedDict):
   
 
 def retrieve_node(state:Graph_State):
-  question=f"""Retrieve relevant documents from the vector database based on the following inputs: {state['candidates']} and a 
-  selected category {state['domain']}. Ensure the documents focus on the selected category, providing insights 
-  into the policies or statements made by the specified candidates or parties."""
+  question=f"""{state['candidates']}, {state['domain']}"""
 
   retrieved_documents=retriever.invoke(question)
 
