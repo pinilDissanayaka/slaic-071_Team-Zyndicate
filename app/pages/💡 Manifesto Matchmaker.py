@@ -26,8 +26,8 @@ with st.sidebar:
             st.button("Upload to vector store.", on_click=load_into_vector_store())
 
 st.title("💡 Manifesto Matchmaker")
-st.write("-----------------------------------------------------------------------------------------------------------") 
 st.write("See which presidential candidate's monitorable promises aligns best with your vision for Sri Lanka")
+st.write("-----------------------------------------------------------------------------------------------------------") 
 
 selected_themes=st.multiselect(label="Select Your Themes", 
                                options=["Infrastructure", "Social Protection", "Trade and Export", "Labour", "Governance", "Law and Order", "Corruption", "Agriculture", "Health", "Taxation", "Education", "Supplementary", "Economic Growth", "IMF Programme", "Reconciliation"], 
@@ -49,13 +49,14 @@ if len(list_of_selected_policies) !=0:
     try:
         if st.button("Match"):
             with st.spinner("Matching..."):
-                aligned_candidate, aligned_candidate_score=get_align_candidate(policies=selected_policies)
+                aligned_candidates, aligned_candidate_scores=get_align_candidate(policies=selected_policies)
                 
                 st.write(stream_text(text="Your Manifesto Aligns..."))
                 
-                st.write(aligned_candidate)
+                for aligned_candidate, aligned_candidate_score in zip(aligned_candidates, aligned_candidate_scores):
+                    st.write(stream_text(text=f"{aligned_candidate_score} with {aligned_candidate}", delay=0.01))
                 
-                st.plotly_chart(figure_or_data=draw_pie_plot(labels=aligned_candidate, sizes=aligned_candidate_score))
+                st.plotly_chart(figure_or_data=draw_pie_plot(labels=aligned_candidates, sizes=aligned_candidate_scores))
     except Exception as e:
         st.error("Internal Server Error.")
         st.error(e.args)
