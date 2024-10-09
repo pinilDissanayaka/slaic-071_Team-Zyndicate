@@ -26,6 +26,7 @@ with st.sidebar:
             st.button("Upload to vector store.", on_click=load_into_vector_store())
             
 st.title("🔍 Manifesto Comparator")
+st.write("Quickly compare candidate manifestos side-by-side on key issues like the economy 💰, healthcare 🏥, and education 📚. Discover the promises, goals, and policies that matter most to you, all in one place.")
 st.write("-----------------------------------------------------------------------------------------------------------")
 
 selected_category = st.selectbox(

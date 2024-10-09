@@ -30,6 +30,7 @@ with st.sidebar:
             st.button("Upload to vector store.", on_click=load_into_vector_store())
 
 st.title("⚖️ Fact Checker")
+st.write("Tired of false claims? Our AI verifies campaign statements in real-time to help you separate fact from fiction. No more falling for exaggerated promises! 🚨")
 st.write("-----------------------------------------------------------------------------------------------------------") 
 selected_party = st.selectbox(
     "Select the party to fact check :",

@@ -29,6 +29,7 @@ with st.sidebar:
 
 
 st.title("🤖 AI Chatbot for Manifesto & Election Queries")
+st.write("Got questions about a candidate’s policies? Just ask! Our intelligent chatbot answers your queries with accurate, verified information from candidates' manifestos and election data. 💬✅")
 st.write("-----------------------------------------------------------------------------------------------------------")
 
 # Store LLM generated responses
