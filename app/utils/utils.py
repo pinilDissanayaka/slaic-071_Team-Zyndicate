@@ -37,7 +37,7 @@ retriever=PineconeVectorStore(embedding=embeddings, index_name=vector_store_inde
 
 
 llm=ChatGroq(model=llm_model,
-            temperature=0.65,
+            temperature=0.01,
             max_tokens=None,
             timeout=None)
 
