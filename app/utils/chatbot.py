@@ -3,7 +3,7 @@ from typing import List, TypedDict
 from langchain_core.output_parsers import StrOutputParser
 from langchain_core.runnables import RunnablePassthrough
 from langchain.prompts import ChatPromptTemplate
-from utils.utils import retriever, llm
+from utils.utils import get_retriever, get_llm
 
 
 class State(TypedDict):
@@ -18,7 +18,7 @@ response:str
 def retrieve_node(state:State):    
     question=f"""{state['question']} """
     
-    retrieve_documents=retriever.invoke(question)
+    retrieve_documents=get_retriever().invoke(question)
     
     return {"documents": retrieve_documents, "question" : state['question']}
     
@@ -36,7 +36,7 @@ def generate_node(state:State):
     question_chain = (
         {"QUESTION":RunnablePassthrough(), "CONTEXT": RunnablePassthrough()}
         | question_prompt
-        | llm
+        | get_llm()
         | StrOutputParser()
         )
     

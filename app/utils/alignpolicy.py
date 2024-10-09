@@ -1,4 +1,4 @@
-from utils.utils import embeddings, retriever, llm
+from utils.utils import get_embeddings, get_retriever, get_llm
 from langchain.prompts import ChatPromptTemplate
 from langgraph.graph import END, StateGraph, START
 from langchain_core.runnables import RunnablePassthrough
@@ -23,7 +23,7 @@ def retrieve_node(state:Graph_State):
   policies=state['policies']
   retrieved_documents=[]
   for policy in policies:
-    retrieved_documents.append(retriever.invoke(policy))
+    retrieved_documents.append(get_retriever(search_k=3).invoke(policy))
     
   return {"documents": retrieved_documents, "policies":state['policies']}
 
@@ -46,7 +46,7 @@ def generate_node(state:Graph_State):
 
     get_align_candidate_prompt=ChatPromptTemplate.from_template(get_align_candidate_prompt_template)
     
-    structured_llm=llm.with_structured_output(Candidate)
+    structured_llm=get_llm().with_structured_output(Candidate)
 
 
     get_relevant_policies_prompt_chain = (

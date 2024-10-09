@@ -1,4 +1,4 @@
-from utils.utils import embeddings, retriever, llm
+from utils.utils import get_embeddings, get_retriever, get_llm
 from langchain.prompts import ChatPromptTemplate
 from langgraph.graph import END, StateGraph, START
 from langchain_core.runnables import RunnablePassthrough
@@ -23,7 +23,7 @@ class RouteQuery(BaseModel):
 def fact_retrieve_node(fact:FactChecker):
     question=f'''{fact['claim']}, {fact['party']}.'''
     
-    retrieve_documents=retriever.invoke(question)
+    retrieve_documents=get_retriever().invoke(question)
     
     return {"documents": retrieve_documents}
 
@@ -40,7 +40,7 @@ def fact_generate_node(fact:FactChecker):
     question_chain = (
         {"FACTS":RunnablePassthrough(), "CONTEXT": RunnablePassthrough()}
         | question_prompt
-        | llm
+        | get_llm()
         | StrOutputParser()
         )
     

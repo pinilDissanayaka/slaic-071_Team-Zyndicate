@@ -1,4 +1,4 @@
-from utils.utils import embeddings, retriever, llm
+from utils.utils import get_embeddings, get_retriever, get_llm
 from langchain.prompts import ChatPromptTemplate
 from langgraph.graph import END, StateGraph, START
 from langchain_core.runnables import RunnablePassthrough
@@ -20,7 +20,7 @@ class Graph_State(TypedDict):
 def retrieve_node(state:Graph_State):
   question=f"""{state['candidates']}, {state['domain']}"""
 
-  retrieved_documents=retriever.invoke(question)
+  retrieved_documents=get_retriever().invoke(question)
 
   return {"documents": retrieved_documents, "candidates":state['candidates']}
 
@@ -42,7 +42,7 @@ def generate_node(state:Graph_State):
   summary_chain = (
     {"CANDIDATES":RunnablePassthrough() , "DOMAIN":RunnablePassthrough(), "CONTEXT": RunnablePassthrough()}
     | summary_prompt
-    | llm
+    | get_llm()
     | StrOutputParser()
     )
 
@@ -68,7 +68,7 @@ def evaluate_node(state:Graph_State):
   evaluate_chain = (
     {"CONTEXT": RunnablePassthrough(), "DOMAIN" :  RunnablePassthrough()}
     | evaluate_prompt
-    | llm
+    | get_llm()
     | StrOutputParser()
     )
 

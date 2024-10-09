@@ -32,15 +32,20 @@ temperature=0.9
 temp_dir="temp"
 
 
-embeddings=GoogleGenerativeAIEmbeddings(model=embedding_model)
+def get_embeddings(embedding_model=embedding_model):
+    embeddings=GoogleGenerativeAIEmbeddings(model=embedding_model)
+    return embeddings
 
-retriever=PineconeVectorStore(embedding=embeddings, index_name=vector_store_index_name).as_retriever(search_kwargs={"k": search_k})
+def get_retriever(search_k=search_k):
+    retriever=PineconeVectorStore(embedding=get_embeddings(), index_name=vector_store_index_name).as_retriever(search_kwargs={"k": search_k})
+    return retriever
 
-
-llm=ChatGroq(model=llm_model,
-            temperature=temperature,
-            max_tokens=None,
-            timeout=None)
+def get_llm(llm_model=llm_model, temperature=temperature):
+    llm=ChatGroq(model=llm_model,
+                temperature=temperature,
+                max_tokens=None,
+                timeout=None)
+    return llm
 
 
 def load_pdf(path):
@@ -62,7 +67,7 @@ def split(docs):
     return doc_splits
 
 def store(doc_splits, index_name=vector_store_index_name):
-    pinecone_vectore_store=PineconeVectorStore.from_documents(documents=doc_splits, embedding=embeddings, index_name=index_name)
+    pinecone_vectore_store=PineconeVectorStore.from_documents(documents=doc_splits, embedding=get_embeddings(), index_name=index_name)
     return pinecone_vectore_store
 
 
