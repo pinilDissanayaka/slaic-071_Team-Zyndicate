@@ -43,7 +43,7 @@ st.write("or")
 
 uploaded_image_file = st.file_uploader("Choose a PNG, JPEG, GIF, BMP, TIFF or WebP files", accept_multiple_files=False, type=["jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp", "webp"])
 
-if uploaded_file:
+if uploaded_image_file:
     try:
         with st.spinner("Extracting..."):
             st.image(image=uploaded_image_file)
