@@ -86,7 +86,8 @@ def load_into_vector_store(directory=temp_dir):
                 store(split(load_txt(relative_path)))
 
     except Exception as e:
-        st.exception("Internal Server Error.", icon="⚠️")
+        st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
+
             
             
             
@@ -99,7 +100,8 @@ def save_pdf_txt_on_temp_dir(uploaded_file, temp_file_path=temp_dir):
         with open(file_path, 'wb') as file_to_write:
             file_to_write.write(uploaded_file.read())
     except Exception as e:
-        st.exception("Internal Server Error.", icon="⚠️")
+        st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
+
         
 def save_img_on_dir(uploaded_image_file, temp_file_path=temp_dir):
     try:
@@ -110,15 +112,17 @@ def save_img_on_dir(uploaded_image_file, temp_file_path=temp_dir):
             file_to_write.write(uploaded_image_file.read())
         return file_path
     except Exception as e:
-        st.exception("Internal Server Error.", icon="⚠️")
-    
+        st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
             
             
 def encode_image(image_path):
-    if image_path:
-        with open(image_path, "rb") as image_file:
-            return base64.b64encode(image_file.read()).decode('utf-8')
-    
+    try:
+        if image_path:
+            with open(image_path, "rb") as image_file:
+                return base64.b64encode(image_file.read()).decode('utf-8')
+    except Exception as e:
+        st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
+
 
 def convert_img_to_text(uploaded_image_file):
     try:
@@ -147,8 +151,8 @@ def convert_img_to_text(uploaded_image_file):
         
         return chat_completion.choices[0].message.content
     except Exception as e:
-        st.exception("Internal Server Error.", icon="⚠️")
-        
+        st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
+
 
 def stream_text(text:str, delay=0.05):
     for word in text.split(" "):
