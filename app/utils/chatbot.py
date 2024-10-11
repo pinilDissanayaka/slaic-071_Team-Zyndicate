@@ -65,5 +65,3 @@ def chat_with_manifesto(user_input):
 
     return response
 
-
-    

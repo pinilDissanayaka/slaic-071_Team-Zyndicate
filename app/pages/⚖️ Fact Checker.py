@@ -18,7 +18,7 @@ with st.sidebar:
     st.subheader("Upload the manifesto of the candidate.")
     
     uploaded_files = st.file_uploader(
-    "Choose a PDF, TXT files", accept_multiple_files=True)
+    "Choose a PDF, TXT files", accept_multiple_files=True, type=["pdf", "txt"])
     
     
     for uploaded_file in uploaded_files:
@@ -41,7 +41,14 @@ text_claim = st.text_area("Enter the claim as text to fact check :")
 
 st.write("or")
 
-uploaded_image_file = st.file_uploader("Choose a PDF, TXT, JPEG or PNG files", accept_multiple_files=False)
+uploaded_image_file = st.file_uploader("Choose a PNG, JPEG, GIF, BMP, TIFF or WebP files", accept_multiple_files=False, type=["jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp", "webp"])
+
+if uploaded_image_file:
+    try:
+        with st.spinner("Extracting..."):
+            st.image(image=uploaded_image_file)
+    except Exception as e:
+        st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
 
 if uploaded_image_file:
     try:
@@ -50,7 +57,7 @@ if uploaded_image_file:
         st.write("Text extracted from uploaded file.")
         st.write(image_claim)
     except Exception as e:
-        st.warning("Internal Server Error.", icon="⚠️")
+        st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
         st.warning(e.args, icon="🚨")
         
     
@@ -68,6 +75,6 @@ if claim and selected_party:
                 st.write("---------------------------------------------------------------------------------------------------------------")
                 st.write_stream(stream_text(evaluation_response))
     except Exception as e:
-        st.warning("Internal Server Error.", icon="⚠️")
+        st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
         st.warning(e.args, icon="🚨")
         
