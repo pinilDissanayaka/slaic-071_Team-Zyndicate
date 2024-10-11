@@ -156,7 +156,7 @@ def convert_img_to_text(uploaded_image_file):
 
 def get_post_to_text(url:str):
     try:
-        post_text=[]
+        post_text:str
         post=WebBaseLoader(web_path=url).load()
         
         for post_chunk in post:
