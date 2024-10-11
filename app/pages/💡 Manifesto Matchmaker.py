@@ -67,7 +67,7 @@ if len(list_of_selected_policies) !=0:
                     
                 st.plotly_chart(figure_or_data=draw_pie_plot(labels=aligned_candidates, sizes=aligned_candidate_scores))
                 
-                st.success(description)
+                st.write_stream(stream=stream_text(text=description))
     except Exception as e:
         st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
 
