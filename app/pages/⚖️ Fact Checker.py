@@ -50,10 +50,7 @@ url=st.text_input("Enter the URL of the post to fact check :")
 if url:
     with st.spinner("Extracting..."):
         post_claim=get_post_to_text(url=url)
-    if post_claim != "":
-        st.write("Text extracted from URL.")
-        st.write(post_claim)
-        
+
 st.write("or")
 
 uploaded_image_file = st.file_uploader("Choose a PNG, JPEG, GIF, BMP, TIFF or WebP files", accept_multiple_files=False, type=["jpg", "jpeg", "png", "gif", "tif", "tiff", "bmp", "webp"])
