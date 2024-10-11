@@ -35,6 +35,8 @@ st.write("----------------------------------------------------------------------
 selected_category = st.selectbox(
     "Which category do you want to compare :",
     ("Economic Growth", "IMF Programme", "Taxation", "Governance", "Social Protection", "Supplementary", "Infrastructure", "Trade and Export", "Agriculture", "Education", "Law and Order", "Health", "Reconciliation", "Corruption", "Labour"),
+    help="Every promise has an associated topic. In this section, select which topics you wish to focus on, under each of your chosen themes. A topic is a distinct subject area that classifies individual promises. Each theme has multiple topics, though not all topics are represented under every theme."
+
 )
 
 candidates = st.text_input("Enter candidate names or party to compare :")

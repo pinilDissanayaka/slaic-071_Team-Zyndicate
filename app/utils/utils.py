@@ -2,7 +2,7 @@ import os
 import logging
 import streamlit as st
 from dotenv import load_dotenv
-from langchain_community.document_loaders import PyPDFLoader, TextLoader
+from langchain_community.document_loaders import PyPDFLoader, TextLoader, WebBaseLoader
 from langchain_groq.chat_models import ChatGroq
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -14,13 +14,13 @@ import base64
 load_dotenv()
 
 
-os.environ['GOOGLE_API_KEY']=st.secrets['GOOGLE_API_KEY']
-os.environ['PINECONE_API_KEY']==st.secrets['PINECONE_API_KEY']
-os.environ['GROQ_API_KEY']==st.secrets['GROQ_API_KEY']
-os.environ['LANGCHAIN_API_KEY']==st.secrets['LANGCHAIN_API_KEY']
+os.environ['GOOGLE_API_KEY']=os.getenv('GOOGLE_API_KEY')
+os.environ['PINECONE_API_KEY']=os.getenv('PINECORN_API_KEY')
+os.environ['GROQ_API_KEY']=os.getenv('GROQ_API_KEY')
+os.environ['LANGCHAIN_API_KEY']=os.getenv('LANGCHAIN_API_KEY')
 os.environ['LANGCHAIN_TRACING_V2']='true'
-os.environ["GOOGLE_API_KEY"]==st.secrets['GOOGLE_API_KEY']
-os.environ["GOOGLE_PROJECT_ID"]==st.secrets['GOOGLE_PROJECT_ID']
+os.environ["GOOGLE_API_KEY"]=os.getenv('GOOGLE_API_KEY')
+os.environ["GOOGLE_PROJECT_ID"]=os.getenv('GOOGLE_PROJECT_ID')
 
 
 llm_model="llama3-groq-70b-8192-tool-use-preview"
@@ -150,6 +150,21 @@ def convert_img_to_text(uploaded_image_file):
         )   
         
         return chat_completion.choices[0].message.content
+    except Exception as e:
+        st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
+
+
+def get_post_to_text(url:str):
+    try:
+        post_list=[]
+        post=WebBaseLoader(web_path=url).load()
+        
+        for post_chunk in post:
+            post_list.append(post_chunk.page_content.replace("\n", ""))
+            
+        post_text=" ".join(post_list)
+        
+        return post_text
     except Exception as e:
         st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
 

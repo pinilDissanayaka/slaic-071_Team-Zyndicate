@@ -2,12 +2,13 @@ import os
 import streamlit as st
 from st_audiorec import st_audiorec
 from utils.factchecker import fact_checker
-from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, convert_img_to_text, stream_text
+from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, convert_img_to_text, stream_text, get_post_to_text
 
 temp_file_path="temp/"
 
 image_claim=""
 text_claim=""
+post_claim=""
 claim=""
 
 # App title
@@ -37,7 +38,18 @@ selected_party = st.selectbox(
     ("National People's Power | NPP", "Samagi Jana Balawegaya | SJB", "Sri Lanka Podujana Peramuna | SLPP", "NDC", "CPP", "PPP", "GUM", "GFP", "GCPP", "APC", "PNC", "LPG", "NDP", "Independent")
 )
 
+if selected_party =="Independent":
+    selected_party=st.text_input("Enter the Independent group name:")
+
 text_claim = st.text_area("Enter the claim as text to fact check :")
+
+st.write("or")
+
+url=st.text_input("Enter the URL of the post to fact check :")
+
+if url:
+    with st.spinner("Extracting..."):
+        post_claim=get_post_to_text(url=url)
 
 st.write("or")
 
@@ -54,16 +66,17 @@ if uploaded_image_file:
     try:
         with st.spinner("Extracting..."):
             image_claim=convert_img_to_text(uploaded_image_file=uploaded_image_file)
-        st.write("Text extracted from uploaded file.")
-        st.write(image_claim)
+        if image_claim != "":
+            st.write("Text extracted from uploaded file.")
+            st.write(image_claim)
     except Exception as e:
         st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
         st.warning(e.args, icon="🚨")
         
     
 
-if image_claim != "" or text_claim != "":
-    claim=image_claim+" "+text_claim
+if image_claim != "" or text_claim != "" or post_claim != "":
+    claim=image_claim+" "+text_claim+" "+post_claim
 
 if claim and selected_party:
     try:

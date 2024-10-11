@@ -26,18 +26,19 @@ def retrieve_node(state:Graph_State):
 
 def generate_node(state:Graph_State):
     
-    get_simplify_manifesto_prompt_template="""Given the following manifesto text, simplify it by converting complex or jargon-heavy language into 
+    get_simplify_manifesto_prompt_template="""Given the following manifesto text from the {CANDIDATE} related to {DOMAIN}, simplify it by converting complex or jargon-heavy language into 
     easy-to-understand terms while retaining the original meaning. 
     Break down any detailed policy proposals into concise and clear bullet points, 
     and explain key concepts in a voter-friendly manner.
-        {CANDIDATE}, {DOMAIN}
-    If possible, include simple real-world examples to clarify the impact of the policies."
+    If possible, include simple real-world examples to clarify the impact of the policies.
+        Party: {CANDIDATE}
+        Domain: {DOMAIN}
         Manifesto Text:{CONTEXT}
     Output Requirements:
-    Simplify complex language.
-    Present key points as bullet points.
-    Maintain original meaning and intent.
-    Provide explanations or examples for difficult concepts.
+        Simplify complex language.
+        Present key points as bullet points.
+        Maintain original meaning and intent.
+        Provide explanations or examples for difficult concepts.
     If the answer is not found in the context, kindly state "I don't know."
     Don't try to make up an answer.
     """
