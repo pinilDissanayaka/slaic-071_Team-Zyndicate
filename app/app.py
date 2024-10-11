@@ -4,6 +4,7 @@ import streamlit as st
 st.set_page_config(page_title="🤗💬 Election-Insight-App ")
 
 st.title("🗳️ Welcome to Election Insight App")
+st.subheader("By Team Zyndicate")
 st.write('Your trusted companion for making informed decisions in the upcoming election!') 
 st.write("---------------------------------------------------------------------------------------------------------------------------------------------------")
 
