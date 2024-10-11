@@ -83,7 +83,7 @@ def get_align_candidate(policies):
     pass
   
   global generated_response
-  return generated_response.candidates, generated_response.scores
+  return generated_response.candidates, generated_response.scores, generated_response.description
 
 def draw_pie_plot(labels, sizes):
   try:
