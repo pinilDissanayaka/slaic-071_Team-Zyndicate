@@ -1,6 +1,7 @@
 import os
 import streamlit as st
-from utils.utils import save_img_on_dir, save_pdf_txt_on_temp_dir, load_into_vector_store
+from utils.utils import save_img_on_dir, save_pdf_txt_on_temp_dir, load_into_vector_store, stream_text
+from utils.simplifier import get_simplify_manifesto
 
 # App title
 st.set_page_config(page_title="🤗💬 Election-Insight-App ")
@@ -27,3 +28,31 @@ with st.sidebar:
 st.title("📜 Manifesto Simplifier")
 st.write("Easily understand complex political promises! The Manifesto Simplifier breaks down lengthy, jargon-filled manifesto texts into simple, easy-to-read summaries. Get clear, concise explanations of candidate policies to help you make informed decisions.")
 st.write("-----------------------------------------------------------------------------------------------------------") 
+
+
+selected_party = st.selectbox(
+    "Select the party to fact check :",
+    ("National People's Power | NPP", "Samagi Jana Balawegaya | SJB", "Sri Lanka Podujana Peramuna | SLPP", "NDC", "CPP", "PPP", "GUM", "GFP", "GCPP", "APC", "PNC", "LPG", "NDP", "Independent")
+)
+
+
+if selected_party:
+    selected_category = st.multiselect(
+        label="Which category do you want to compare :",
+        options=("Economic Growth", "IMF Programme", "Taxation", "Governance", "Social Protection", "Supplementary", "Infrastructure", "Trade and Export", "Agriculture", "Education", "Law and Order", "Health", "Reconciliation", "Corruption", "Labour"),
+    )
+    
+if selected_party and selected_category:
+    if st.button("Simplify"):
+        try:
+            with st.spinner("Processing..."):
+                simplified_manifesto=get_simplify_manifesto(party=selected_party, category=selected_category)
+                
+                st.write_stream(stream_text(simplified_manifesto))
+                
+        except Exception as e:
+            st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
+
+
+
+

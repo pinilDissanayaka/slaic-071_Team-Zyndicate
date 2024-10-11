@@ -6,14 +6,15 @@ from langchain_core.runnables import RunnablePassthrough
 import plotly.express as px
 from langchain_core.output_parsers import StrOutputParser
 from typing import TypedDict, List
-from pydantic import BaseModel, Field
 
+
+generated_response:str
 
 class Graph_State(TypedDict):
     candidate:str
     documents: List[str]
     generation: str
-    domain: str
+    domain: List[str]
 
 def retrieve_node(state:Graph_State):
     question=f"""{state["domain"]}, {state["candidate"]}"""
@@ -46,6 +47,7 @@ def generate_node(state:Graph_State):
     {"CONTEXT": RunnablePassthrough()}   
     | get_simplify_manifesto_prompt
     | get_llm()
+    | StrOutputParser()
     )
 
     generation=get_simplify_manifesto_chain.invoke({"CONTEXT": state["documents"]})
@@ -69,7 +71,7 @@ workflow.add_edge("generate_node", END)
 
 graph=workflow.compile()
 
-def get_simplify_manifesto(domain:str, candidate:str):
+def get_simplify_manifesto(domain:list, candidate:str):
   for event in graph.stream({"domain": domain, "candidate": candidate}):
     pass
   
