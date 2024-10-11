@@ -1,3 +1,4 @@
+import streamlit as st
 from utils.utils import get_embeddings, get_retriever, get_llm
 from langchain.prompts import ChatPromptTemplate
 from langgraph.graph import END, StateGraph, START
@@ -16,6 +17,7 @@ class Graph_State(TypedDict):
 class Candidate(BaseModel):
     candidates: List[str]=Field(description="Which Presidential Candidates Aligns Most with Your Policy Choices")
     scores:List[float]=Field(description="Alignment percentage")
+    description:str=Field(description="Explanation of how each candidate's policies match the user's preferences")
 
 generated_response:Candidate
 
@@ -77,15 +79,16 @@ workflow.add_edge("generate_node", END)
 graph=workflow.compile()
 
 def get_align_candidate(policies):
-    for event in graph.stream({"policies": policies}):
-      pass
-    
-    global generated_response
-
-
-    return generated_response.candidates, generated_response.scores
+  for event in graph.stream({"policies": policies}):
+    pass
+  
+  global generated_response
+  return generated_response.candidates, generated_response.scores
 
 def draw_pie_plot(labels, sizes):
+  try:
     pie_chart=px.pie(values=sizes, names=labels)
   
     return pie_chart
+  except Exception as e:
+    st.warning(f"An unexpected error occurred. Please try again.", icon="⚠️")
