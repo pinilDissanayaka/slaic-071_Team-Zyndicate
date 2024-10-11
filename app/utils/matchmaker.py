@@ -87,6 +87,7 @@ def get_align_candidate(policies):
 
 def draw_pie_plot(labels, sizes):
   try:
+    st.subheader("Which Presidential Candidate Aligns Most with Your Policy Choices?")
     pie_chart=px.pie(values=sizes, names=labels)
   
     return pie_chart
