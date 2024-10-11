@@ -14,13 +14,13 @@ import base64
 load_dotenv()
 
 
-os.environ['GOOGLE_API_KEY']=st.secrets['GOOGLE_API_KEY']
-os.environ['PINECONE_API_KEY']==st.secrets['PINECONE_API_KEY']
-os.environ['GROQ_API_KEY']==st.secrets['GROQ_API_KEY']
-os.environ['LANGCHAIN_API_KEY']==st.secrets['LANGCHAIN_API_KEY']
+os.environ['GOOGLE_API_KEY']=os.getenv('GOOGLE_API_KEY')
+os.environ['PINECONE_API_KEY']=os.getenv('PINECORN_API_KEY')
+os.environ['GROQ_API_KEY']=os.getenv('GROQ_API_KEY')
+os.environ['LANGCHAIN_API_KEY']=os.getenv('LANGCHAIN_API_KEY')
 os.environ['LANGCHAIN_TRACING_V2']='true'
-os.environ["GOOGLE_API_KEY"]==st.secrets['GOOGLE_API_KEY']
-os.environ["GOOGLE_PROJECT_ID"]==st.secrets['GOOGLE_PROJECT_ID']
+os.environ["GOOGLE_API_KEY"]=os.getenv('GOOGLE_API_KEY')
+os.environ["GOOGLE_PROJECT_ID"]=os.getenv('GOOGLE_PROJECT_ID')
 
 
 llm_model="llama3-groq-70b-8192-tool-use-preview"
