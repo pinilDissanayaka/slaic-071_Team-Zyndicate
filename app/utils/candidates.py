@@ -1,70 +1,55 @@
-import streamlit as st
+import os
 from langchain_community.utilities.sql_database import SQLDatabase
 from sqlalchemy import create_engine
 from sqlalchemy.pool import NullPool
+
 from utils import get_llm
 from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
-from langchain_community.tools.sql_database.tool import (
-    InfoSQLDatabaseTool,
-    ListSQLDatabaseTool,
-    QuerySQLCheckerTool,
-    QuerySQLDataBaseTool,
-)
 from langchain_core.messages import SystemMessage, HumanMessage
 from langgraph.prebuilt import create_react_agent
 
-class CandidateAgent:
-    def __init__(self, db_uri):
-        self.db_uri = db_uri
-        self.engine = self._get_engine()
-        self.db = SQLDatabase(self.engine)
-        self.llm = get_llm()
-        self.toolkit = SQLDatabaseToolkit(db=self.db, llm=self.llm)
-        self.tools = self.toolkit.get_tools()
-        self.agent_executor = self._initialize_agent()
+def get_engine_for_postgres_db():
+    """Connect to the PostgreSQL database and create engine."""
+    postgres_uri = os.getenv("DB")
+    if not postgres_uri:
+        raise ValueError("DB environment variable is not set")
+    return create_engine(postgres_uri, poolclass=NullPool)
 
-    def _get_engine(self):
-        """Connect to the PostgreSQL database and create engine."""
-        return create_engine(self.db_uri, poolclass=NullPool)
+def candidate_finder(user_query: str):
+    try:
+        engine = get_engine_for_postgres_db()
+        db = SQLDatabase(engine)
+        llm = get_llm()
 
-    def _initialize_agent(self):
-        """Initialize the agent with the necessary tools and messages."""
+        toolkit = SQLDatabaseToolkit(db=db, llm=llm)
+        tools = toolkit.get_tools()
+
         SQL_PREFIX = """You are an agent designed to interact with a SQL database.
-        Given an input question, create a syntactically correct SQLite query to run, then look at the results of the query and return the answer.
+        Given an input question, create a syntactically correct SQL query to run, then look at the results of the query and return the answer.
         Unless the user specifies a specific number of examples they wish to obtain, always limit your query to at most 5 results.
         You can order the results by a relevant column to return the most interesting examples in the database.
         Never query for all the columns from a specific table, only ask for the relevant columns given the question.
-        You have access to tools for interacting with the database.
-        Only use the below tools. Only use the information returned by the below tools to construct your final answer.
-        You MUST double check your query before executing it. If you get an error while executing a query, rewrite the query and try again.
-
+        You have access to tools for interacting with the PostgreSQL database.
+        Only use the below tools and the information returned by them to construct your final answer.
         DO NOT make any DML statements (INSERT, UPDATE, DELETE, DROP etc.) to the database.
-
-        To start you should ALWAYS look at the tables in the database to see what you can query.
-        Do NOT skip this step.
-        Then you should query the schema of the most relevant tables."""
+        Always start by looking at the schema of the relevant tables."""
 
         system_message = SystemMessage(content=SQL_PREFIX)
-        return create_react_agent(self.llm, self.tools, messages_modifier=system_message)
+        agent_executor = create_react_agent(llm, tools, messages_modifier=system_message)
 
-    def query_candidates(self, user_query):
-        """Query the candidates based on the user's query."""
-        query_message = HumanMessage(content=user_query)
-        responses = []
-        for response in self.agent_executor.stream({"messages": [query_message]}):
-            responses.append(response)
-        return responses
+        responses = agent_executor.invoke({"messages": [HumanMessage(content=user_query)]})
+        
+        # Process the final response
+        final_answer = responses['messages'][-1].content if responses['messages'] else "No response generated"
+        return final_answer
 
-# Streamlit app
-def agent():
-    st.title("Election Insight App")
-    db_uri = st.text_input("Enter the database URI:")
-    if db_uri:
-        agent = CandidateAgent(db_uri)
-        user_query = st.text_area("Enter your query:")
-        if st.button("Submit"):
-            responses = agent.query_candidates(user_query)
-            for response in responses:
-                st.write(response)
-                st.write("----")
+    except ValueError as ve:
+        return f"Configuration error: {str(ve)}"
+    except Exception as e:
+        return f"Error during query execution: {str(e)}"
 
+
+if __name__ == "__main__":
+    user_query = "List down all candidates and their eduction qulifications"
+    results = candidate_finder(user_query)
+    print(results)
