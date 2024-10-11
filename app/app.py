@@ -4,6 +4,7 @@ import streamlit as st
 st.set_page_config(page_title="🤗💬 Election-Insight-App ")
 
 st.title("🗳️ Welcome to Election Insight App")
+st.subheader("By Team Zyndicate")
 st.write('Your trusted companion for making informed decisions in the upcoming election!') 
 st.write("---------------------------------------------------------------------------------------------------------------------------------------------------")
 
@@ -28,6 +29,10 @@ st.write("Got questions about a candidate’s policies? Just ask! Our intelligen
 st.subheader("💡 Manifesto Matchmaker:")
 
 st.write("Discover which candidate’s policies align most with your values! The Manifesto Matchmaker analyzes candidate manifestos and helps you find the perfect match based on the topics you care about the most. Whether it’s healthcare, education, the economy, or the environment, this tool compares key policies to show how closely they align with your personal preferences and beliefs. Empower your vote by choosing a candidate who shares your vision for the future!")
+
+st.subheader("📜 Manifesto Simplifier")
+
+st.write("Understand political promises effortlessly! The Manifesto Simplifier transforms complex manifesto texts into clear, easy-to-read summaries. Get concise explanations of candidates' policies to help you make informed choices at the polls.")
 
 st.write("---------------------------------------------------------------------------------------------------------------------------------------------------")
 

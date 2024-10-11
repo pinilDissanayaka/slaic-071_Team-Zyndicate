@@ -2,7 +2,7 @@ import os
 import logging
 import streamlit as st
 from dotenv import load_dotenv
-from langchain_community.document_loaders import PyPDFLoader, TextLoader
+from langchain_community.document_loaders import PyPDFLoader, TextLoader, WebBaseLoader
 from langchain_groq.chat_models import ChatGroq
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -150,6 +150,21 @@ def convert_img_to_text(uploaded_image_file):
         )   
         
         return chat_completion.choices[0].message.content
+    except Exception as e:
+        st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
+
+
+def get_post_to_text(url:str):
+    try:
+        post_list=[]
+        post=WebBaseLoader(web_path=url).load()
+        
+        for post_chunk in post:
+            post_list.append(post_chunk.page_content.replace("\n", ""))
+            
+        post_text=" ".join(post_list)
+        
+        return post_text
     except Exception as e:
         st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
 

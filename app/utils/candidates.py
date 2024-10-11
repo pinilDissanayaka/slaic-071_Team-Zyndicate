@@ -2,7 +2,6 @@ import os
 from langchain_community.utilities.sql_database import SQLDatabase
 from sqlalchemy import create_engine
 from sqlalchemy.pool import NullPool
-
 from utils import get_llm
 from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
 from langchain_core.messages import SystemMessage, HumanMessage

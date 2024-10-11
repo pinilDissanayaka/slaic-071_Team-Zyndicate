@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, stream_text
-from utils.alignpolicy import get_align_candidate, draw_pie_plot
+from utils.matchmaker import get_align_candidate, draw_pie_plot
 from utils.policies import get_policies
 
 list_of_selected_policies=[]
@@ -58,14 +58,18 @@ if len(list_of_selected_policies) !=0:
     try:
         if st.button("Match"):
             with st.spinner("Matching..."):
-                aligned_candidates, aligned_candidate_scores=get_align_candidate(policies=selected_policies)
+                aligned_candidates, aligned_candidate_scores, description=get_align_candidate(policies=selected_policies)
                 
                 st.subheader("Your Manifesto Aligns with ...")
                 
                 for aligned_candidate, aligned_candidate_score in zip(aligned_candidates, aligned_candidate_scores):
                     st.write_stream(stream_text(text=f"Candidate {aligned_candidate}", delay=0.06))
-                
+                    
                 st.plotly_chart(figure_or_data=draw_pie_plot(labels=aligned_candidates, sizes=aligned_candidate_scores))
+                
+                st.subheader("In their manifesto...")
+                
+                st.write_stream(stream=stream_text(text=description))
     except Exception as e:
         st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
 

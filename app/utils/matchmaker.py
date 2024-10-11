@@ -1,3 +1,4 @@
+import streamlit as st
 from utils.utils import get_embeddings, get_retriever, get_llm
 from langchain.prompts import ChatPromptTemplate
 from langgraph.graph import END, StateGraph, START
@@ -16,6 +17,7 @@ class Graph_State(TypedDict):
 class Candidate(BaseModel):
     candidates: List[str]=Field(description="Which Presidential Candidates Aligns Most with Your Policy Choices")
     scores:List[float]=Field(description="Alignment percentage")
+    description:str=Field(description="Explain the objectives and highlight the key points from each manifesto or policy statement")
 
 generated_response:Candidate
 
@@ -40,7 +42,7 @@ def generate_node(state:Graph_State):
     Based on this information, return the candidate with the highest alignment percentage out of 100%, 
     along with an explanation of how each candidate's policies match the user's preferences.
     If the answer is not found in the context, kindly state "I don't know." 
-    Don't try to make up an answer.
+    Don't try to make up an answer.Don't try to make up an answer.
     """
     
 
@@ -77,15 +79,17 @@ workflow.add_edge("generate_node", END)
 graph=workflow.compile()
 
 def get_align_candidate(policies):
-    for event in graph.stream({"policies": policies}):
-      pass
-    
-    global generated_response
-
-
-    return generated_response.candidates, generated_response.scores
+  for event in graph.stream({"policies": policies}):
+    pass
+  
+  global generated_response
+  return generated_response.candidates, generated_response.scores, generated_response.description
 
 def draw_pie_plot(labels, sizes):
+  try:
+    st.subheader("Which Presidential Candidate Aligns Most with Your Policy Choices?")
     pie_chart=px.pie(values=sizes, names=labels)
   
     return pie_chart
+  except Exception as e:
+    st.warning(f"An unexpected error occurred. Please try again.", icon="⚠️")
