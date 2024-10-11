@@ -39,7 +39,7 @@ selected_party = st.selectbox(
 )
 
 if selected_party =="Independent":
-    st.text_input("Enter the Independent group name:")
+    selected_party=st.text_input("Enter the Independent group name:")
 
 text_claim = st.text_area("Enter the claim as text to fact check :")
 
