@@ -46,7 +46,7 @@ if selected_party and selected_category:
     if st.button("Simplify"):
         try:
             with st.spinner("Processing..."):
-                simplified_manifesto=get_simplify_manifesto(party=selected_party, category=selected_category)
+                simplified_manifesto=get_simplify_manifesto(domain=selected_category, candidate=selected_party)
                 
                 st.write_stream(stream_text(simplified_manifesto))
                 
