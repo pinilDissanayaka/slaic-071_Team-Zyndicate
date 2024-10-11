@@ -10,3 +10,4 @@ pypdf
 streamlit-audiorec
 plotly
 bs4
+psycopg2
