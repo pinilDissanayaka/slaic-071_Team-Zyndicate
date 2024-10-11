@@ -9,3 +9,4 @@ langchain_huggingface
 pypdf
 streamlit-audiorec
 plotly
+bs4
