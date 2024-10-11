@@ -156,11 +156,14 @@ def convert_img_to_text(uploaded_image_file):
 
 def get_post_to_text(url:str):
     try:
-        post_text:str
+        post_list=[]
         post=WebBaseLoader(web_path=url).load()
         
         for post_chunk in post:
-            post_text+=post_chunk.page_content.replace("\n", "")
+            post_list.append(post_chunk.page_content.replace("\n", ""))
+            
+        post_text=" ".join(post_list)
+        
         return post_text
     except Exception as e:
         st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
