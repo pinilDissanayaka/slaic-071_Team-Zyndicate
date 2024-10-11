@@ -1,7 +1,7 @@
 import os
 import streamlit as st
 from utils.utils import save_pdf_txt_on_temp_dir, load_into_vector_store, stream_text
-from utils.alignpolicy import get_align_candidate, draw_pie_plot
+from utils.matchmaker import get_align_candidate, draw_pie_plot
 from utils.policies import get_policies
 
 list_of_selected_policies=[]
