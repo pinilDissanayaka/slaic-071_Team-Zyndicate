@@ -29,7 +29,7 @@ st.subheader("💡 Manifesto Matchmaker:")
 
 st.write("Discover which candidate’s policies align most with your values! The Manifesto Matchmaker analyzes candidate manifestos and helps you find the perfect match based on the topics you care about the most. Whether it’s healthcare, education, the economy, or the environment, this tool compares key policies to show how closely they align with your personal preferences and beliefs. Empower your vote by choosing a candidate who shares your vision for the future!")
 
-st.write("Manifesto Simplifier")
+st.subheader("📜 Manifesto Simplifier")
 
 st.write("Understand political promises effortlessly! The Manifesto Simplifier transforms complex manifesto texts into clear, easy-to-read summaries. Get concise explanations of candidates' policies to help you make informed choices at the polls.")
 
