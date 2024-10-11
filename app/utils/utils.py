@@ -160,7 +160,7 @@ def get_post_to_text(url:str):
         post=WebBaseLoader(web_path=url).load()
         
         for post_chunk in post:
-            post_text.append(post_chunk.page_content.replace("\n", ""))
+            post_text+=post_chunk.page_content.replace("\n", "")
         return post_text
     except Exception as e:
         st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
