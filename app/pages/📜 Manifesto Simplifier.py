@@ -24,6 +24,6 @@ with st.sidebar:
     except Exception as e:
         st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
 
-st.title("💡 Manifesto Matchmaker")
-st.write("See which presidential candidate's monitorable promises aligns best with your vision for Sri Lanka")
+st.title("📜 Manifesto Simplifier")
+st.write("Easily understand complex political promises! The Manifesto Simplifier breaks down lengthy, jargon-filled manifesto texts into simple, easy-to-read summaries. Get clear, concise explanations of candidate policies to help you make informed decisions.")
 st.write("-----------------------------------------------------------------------------------------------------------") 
