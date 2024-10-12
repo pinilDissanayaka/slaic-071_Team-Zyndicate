@@ -6,7 +6,7 @@ from utils.utils import load_into_vector_store, save_pdf_txt_on_temp_dir, stream
 temp_file_path="temp/"
 
 # App title
-st.set_page_config(page_title="🤗💬 Election-Insight-App ")
+st.set_page_config(page_title="🤗💬 ElectWise")
 
 #app side bar
 with st.sidebar:

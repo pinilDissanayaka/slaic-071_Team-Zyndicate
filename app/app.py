@@ -3,12 +3,12 @@ import streamlit as st
 # App title
 st.set_page_config(page_title="🤗💬 Election-Insight-App ")
 
-st.title("🗳️ Welcome to Election Insight App")
+st.title("🗳️ Welcome to ElectWise")
 st.subheader("By Team Zyndicate")
 st.write('Your trusted companion for making informed decisions in the upcoming election!') 
 st.write("---------------------------------------------------------------------------------------------------------------------------------------------------")
 
-st.write('In today’s digital age, where political promises and misinformation are rampant, it’s hard to know what’s true. The Election Insight App is here to cut through the noise and give you verified, real-time insights into candidates and their policies. We empower voters with accurate information so you can cast your vote confidently. 🏛️✨') 
+st.write('In today’s digital age, where political promises and misinformation are rampant, it’s hard to know what’s true. The ElectWise is here to cut through the noise and give you verified, real-time insights into candidates and their policies. We empower voters with accurate information so you can cast your vote confidently. 🏛️✨') 
 
 st.write("---------------------------------------------------------------------------------------------------------------------------------------------------")
 
@@ -36,7 +36,7 @@ st.write("Understand political promises effortlessly! The Manifesto Simplifier t
 
 st.write("---------------------------------------------------------------------------------------------------------------------------------------------------")
 
-st.header("⚙️ Technologies Powering Election Insight:")
+st.header("⚙️ Technologies Powering ElectWise :")
 
 st.subheader("💡 LLM - LLaMA 3.1 70B:")
 
@@ -56,5 +56,5 @@ st.write("Leverage advanced AI models to ensure precise data analysis and accura
 
 st.write("---------------------------------------------------------------------------------------------------------------------------------------------------")
 
-st.write("The Election Insight App is more than just an information source—it's your personal election guide, ensuring you vote based on verified facts and transparent data. 🚀💡 Make every vote count!")
+st.write("The ElectWise is more than just an information source—it's your personal election guide, ensuring you vote based on verified facts and transparent data. 🚀💡 Make every vote count!")
 
