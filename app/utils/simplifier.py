@@ -38,8 +38,7 @@ def generate_node(state:Graph_State):
         Present key points as bullet points.
         Maintain original meaning and intent.
         Provide explanations or examples for difficult concepts.
-    If the answer is not found in the context, kindly state "I don't know."
-    Don't try to make up an answer.
+    If the answer is not found in the context, kindly state "I don't know." Don't try to make up an answer.
     """
 
     get_simplify_manifesto_prompt=ChatPromptTemplate.from_template(get_simplify_manifesto_prompt_template)
