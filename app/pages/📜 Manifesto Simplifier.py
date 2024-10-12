@@ -4,7 +4,7 @@ from utils.utils import save_img_on_dir, save_pdf_txt_on_temp_dir, load_into_vec
 from utils.simplifier import get_simplify_manifesto
 
 # App title
-st.set_page_config(page_title="🤗💬 Election-Insight-App ")
+st.set_page_config(page_title="🤗💬 ElectWise")
 
 #app side bar
 with st.sidebar:

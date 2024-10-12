@@ -7,7 +7,7 @@ def clear_state():
     st.session_state.clear()
 
 # App title
-st.set_page_config(page_title="🤗💬 Election-Insight-App ")
+st.set_page_config(page_title="🤗💬 ElectWise")
 
 #app side bar
 with st.sidebar:

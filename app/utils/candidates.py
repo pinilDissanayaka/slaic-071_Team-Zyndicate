@@ -57,7 +57,7 @@ class CandidateAgent:
 
 # Streamlit app
 def agent():
-    st.title("Election Insight App")
+    st.title("ElectWise  App")
     db_uri = st.text_input("Enter the database URI:")
     if db_uri:
         agent = CandidateAgent(db_uri)
