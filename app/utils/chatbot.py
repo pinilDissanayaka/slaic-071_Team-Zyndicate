@@ -28,7 +28,6 @@ def generate_node(state:State):
     Answer question question : {QUESTION}. Provide accurate, fact-based responses using the manifestos, and offer comparisons if asked.
     using only given context : {CONTEXT}
     Ensure that all answers are concise, neutral, and factually based on the information provided in the manifestos.
-    If the answer is not found in the context, kindly state "I don't know." Don't try to make up an answer.
     """
 
     question_prompt=ChatPromptTemplate.from_template(question_prompt_template)
