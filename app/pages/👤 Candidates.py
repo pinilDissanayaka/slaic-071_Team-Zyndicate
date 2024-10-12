@@ -37,7 +37,7 @@ if st.button("Query Candidates"):
     if location:
         with st.spinner(f"Querying candidates from {location}..."):
             for response in candidate_agent.agent_executor.stream({"messages": [f"Who are the candidates from {location}?"]}):
-                st.write_stream(stream_text(text=response))
+                st.write(response)
                 st.write("----------------------------------------------------------------------------------------------------------------------------------------------------------------")
     else:
         st.warning("Please enter a valid location.")
