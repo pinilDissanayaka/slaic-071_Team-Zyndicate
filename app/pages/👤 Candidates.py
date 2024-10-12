@@ -23,13 +23,13 @@ with st.sidebar:
 
 
 # Set up the Streamlit page
-st.title("Election Candidate Query")
+st.title("👤 Election Candidate")
 
 # User input for location
 location = st.text_input("Enter the location (e.g., Colombo):", "")
 
 # Initialize the CandidateAgent with the database URI
-db_uri = "postgresql://<uri>.aws.neon.tech/Election?sslmode=require"
+db_uri = "postgresql://Denuwan:rsqY2Jbj7CZQ@ep-dark-frog-a5hpd82n.us-east-2.aws.neon.tech/Election?sslmode=require"
 candidate_agent = CandidateAgent(db_uri)
 
 # Query and display results when user provides a location
