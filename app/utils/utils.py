@@ -28,7 +28,7 @@ vision_model="llava-v1.5-7b-4096-preview"
 embedding_model="models/text-embedding-004"
 vector_store_index_name="manifesto"
 search_k=4
-temperature=0.7
+temperature=0.6
 temp_dir="temp"
 
 
