@@ -84,6 +84,8 @@ def load_into_vector_store(directory=temp_dir):
                 store(split(load_pdf(relative_path)))
             elif os.path.splitext(dir)[1] == 'txt':
                 store(split(load_txt(relative_path)))
+        
+        st.success("Vector store created successfully.", icon="✅")
 
     except Exception as e:
         st.warning(f"An unexpected error occurred: {str(e.args)}. Please try again.", icon="⚠️")
